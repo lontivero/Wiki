@@ -1,0 +1,51 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="$root_path$css/style.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="http://www.vim.org/images/vim_shortcut.ico">
+    <link rel="stylesheet" href="$root_path$highlight/styles/default.min.css">
+    <script src="$root_path$highlight/highlight.min.js"></script>
+    <title>$title$</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link href="$root_path$css/bootstrap-theme.min.css" rel="stylesheet" >
+	<link href='$root_path$css/roboto.css' rel='stylesheet' type='text/css'>
+
+	<!-- Some CSS, for removing Code prettify borders -->
+	<style>
+		pre.prettyprint {
+			border: none !important;
+			padding : 0.3px !important;
+			color : white !important;
+			background-color: #222222 !important;
+		}
+
+		div > pre > p {
+			display : none !important;
+		}
+		div > pre > span {
+			display : none !important;
+		}
+
+		body {
+			font-family: Roboto Condensed, sans-serif !important; 
+		}
+
+	</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+			<ul class="nav navbar-nav">
+				<li><a class ="title" href="#">Vim Wiki</a></li>
+				<li><a class = "nav-item"href="$root_path$index.html">Index</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+    <div class="container">
+		$body$
+    </div>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
