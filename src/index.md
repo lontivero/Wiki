@@ -1,7 +1,20 @@
-# My knowledge base 
+---
+title: My knowledge base 
+...
 
-- [Tasks](tasks): things to be done _yesterday_ 
-- [Tips & tricks](tips):  Mostly linux command lines.
+ [Tasks](tasks): things to be done _yesterday_ 
+ 
+ [Tips & tricks](tips):  Mostly linux command lines.
 
+ [Wasabi Wallet](wasabi/index)
 
-- [Research](research)
+ [Bitcoin](bitcoin)
+ 
+ [Research](research)
+ 
+ Languages
+ * [bash](langs/bash)
+ * [F#](langs/fshap)
+ * [Python](langs/python)
+ * [Haskell](langs/haskell)
+ * [brainfuck](langs/brainfuck)  

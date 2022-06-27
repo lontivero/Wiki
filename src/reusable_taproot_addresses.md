@@ -1,3 +1,7 @@
+---
+title: Reusable taproot addresses
+...
+
 :::::::: Alert ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 This is an alternative to bip47 by ©  Kixunil, MIT License (MIT).
 
@@ -10,7 +14,7 @@ __DISCLAIMER__ --- This is here just because i always forget everything so,
 got to the gist for an up to dated version.
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-# Reusable taproot addresses
+
 
 ## Abstract
 

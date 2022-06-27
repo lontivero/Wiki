@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.2 — by Tristano Ajmone
+==============================================================================
+Copyright © Tristano Ajmone, 2017-2020, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License
+
+Copyright (c) Tristano Ajmone, 2017-2020 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017-2020,
+released under the MIT License (MIT); it contains readaptations of substantial
+portions of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Effective F#</title>
+  <style type="text/css">
+@charset "UTF-8";.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#24292e;font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:16px;line-height:1.5;word-wrap:break-word;box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}.markdown-body a{color:#0366d6;background-color:transparent;text-decoration:none;-webkit-text-decoration-skip:objects}.markdown-body a:active,.markdown-body a:hover{outline-width:0}.markdown-body a:hover{text-decoration:underline}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body strong{font-weight:600}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1{font-size:2em;margin:.67em 0;padding-bottom:.3em;border-bottom:1px solid #eaecef}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid #eaecef}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#6a737d}.markdown-body img{border-style:none}.markdown-body svg:not(:root){overflow:hidden}.markdown-body hr{box-sizing:content-box;height:.25em;margin:24px 0;padding:0;overflow:hidden;background-color:#e1e4e8;border:0}.markdown-body hr::before{display:table;content:""}.markdown-body hr::after{display:table;clear:both;content:""}.markdown-body input{margin:0;overflow:visible;font:inherit;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}.markdown-body *{box-sizing:border-box}.markdown-body blockquote{margin:0}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dd{margin-left:0}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body code{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace}.markdown-body pre{font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;word-wrap:normal}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #dfe2e5}.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body code{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}.markdown-body code::after,.markdown-body code::before{letter-spacing:-.2em;content:" "}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code::after,.markdown-body pre code::before{content:normal}.markdown-body .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}.markdown-body kbd{box-shadow:inset 0 -1px 0 #959da5;display:inline-block;padding:3px 5px;font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;color:#444d56;vertical-align:middle;background-color:#fcfcfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5}.markdown-body :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:3px}.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}.markdown-body::before{display:table;content:""}.markdown-body::after{display:table;clear:both;content:""}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.Alert,.Error,.Note,.Success,.Warning{padding:11px;margin-bottom:24px;border-style:solid;border-width:1px;border-radius:4px}.Alert p,.Error p,.Note p,.Success p,.Warning p{margin-top:0}.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child{margin-bottom:0}.Alert{color:#246;background-color:#e2eef9;border-color:#bac6d3}.Warning{color:#4c4a42;background-color:#fff9ea;border-color:#dfd8c2}.Error{color:#911;background-color:#fcdede;border-color:#d2b2b2}.Success{color:#22662c;background-color:#e2f9e5;border-color:#bad3be}.Note{color:#2f363d;background-color:#f6f8fa;border-color:#d5d8da}.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{color:#246;margin-bottom:0}.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{color:#4c4a42;margin-bottom:0}.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{color:#911;margin-bottom:0}.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{color:#22662c;margin-bottom:0}.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{color:#2f363d;margin-bottom:0}.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{margin-top:0}h1.title,p.subtitle{text-align:center}h1.title.followed-by-subtitle{margin-bottom:0}p.subtitle{font-size:1.5em;font-weight:600;line-height:1.25;margin-top:0;margin-bottom:16px;padding-bottom:.3em}div.line-block{white-space:pre-line}
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="highlight/styles/default.min.css">
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="none.css">
+    <script src="highlight/highlight.min.js"></script>
+</head>
+<body>
+<article class="markdown-body">
+<a href="index.html">Wiki Home</a>
+<header>
+<h1 class="title">Effective F#</h1>
+</header>
+<hr>
+<nav id="TOC">
+<h1 class="toc-title">Contents</h1>
+<ul>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#high-level-design">High-level design</a></li>
+<li><a href="#setting-up-a-project">Setting up a project</a></li>
+<li><a href="#modules-and-namespaces">Modules and namespaces</a></li>
+<li><a href="#signature-files">Signature files</a></li>
+<li><a href="#organising-modules---general">Organising modules - general</a>
+<ul>
+<li><a href="#working-with-multiple-assemblies">Working with multiple assemblies</a></li>
+</ul></li>
+<li><a href="#code-formatting">Code formatting</a>
+<ul>
+<li><a href="#function-style">Function style</a></li>
+<li><a href="#format-to-make-diffs-more-readable">Format to make diffs more readable</a></li>
+<li><a href="#formatting-match-expressions">Formatting match expressions</a></li>
+<li><a href="#formatting-inline-lambdas">Formatting inline lambdas</a></li>
+<li><a href="#formatting-generic-types">Formatting Generic types</a></li>
+</ul></li>
+<li><a href="#coding-tips">Coding tips</a>
+<ul>
+<li><a href="#use-exhaustive-pattern-matching">Use exhaustive pattern matching</a></li>
+<li><a href="#avoid-boilerplate">Avoid boilerplate</a></li>
+<li><a href="#make-common-errors-obvious">Make common errors obvious</a></li>
+<li><a href="#complex-type-hacks">Complex type hacks</a></li>
+<li><a href="#mutability">Mutability</a></li>
+<li><a href="#operators">Operators</a></li>
+</ul></li>
+<li><a href="#oo-code-vs-fp-code">OO code vs FP code</a></li>
+<li><a href="#working-with-dictionaries">Working with Dictionaries</a></li>
+<li><a href="#working-with-the-result-type">Working with the Result type</a>
+<ul>
+<li><a href="#to-chain-results-in-series-monads">To chain results in series (“monads”)</a></li>
+</ul></li>
+<li><a href="#result-computation-expressions-instead-of-bind">Result computation expressions instead of bind</a>
+<ul>
+<li><a href="#to-combine-results-in-parallel-applicatives">To combine results in parallel (“applicatives”)</a></li>
+<li><a href="#validating-lists-of-items">Validating lists of items</a></li>
+</ul></li>
+<li><a href="#constrained-types">Constrained types</a></li>
+<li><a href="#dtos-and-validation">DTOs and Validation</a></li>
+<li><a href="#interacting-with-c">Interacting with C</a>
+<ul>
+<li><a href="#exposing-an-api-to-c">Exposing an API to C</a></li>
+<li><a href="#exposing-choice-types-to-c">Exposing choice types to C</a></li>
+</ul></li>
+<li><a href="#common-compiler-errors">Common compiler errors</a></li>
+<li><a href="#common-errors-in-f-interactive">Common errors in F# Interactive</a></li>
+</ul>
+</nav>
+<hr>
+<h2 id="architecture">Architecture</h2>
+<ul>
+<li>Use Onion architecture
+<ul>
+<li>Dependencies go inwards. That is, the Core domain doesn’t know about outside layers</li>
+</ul></li>
+<li>Use pipeline model to implement workflows/use-cases/stories
+<ul>
+<li>Business logic makes decisions</li>
+<li>IO does storage with minimal logic</li>
+<li>Keep Business logic and IO separate</li>
+<li>Keep IO at edges</li>
+</ul></li>
+<li>Testing
+<ul>
+<li>Only need to unit test the business logic</li>
+<li>IO is tested as part of integration tests</li>
+</ul></li>
+</ul>
+<h2 id="high-level-design">High-level design</h2>
+<p>It’s good to switch between top-down (decomposition) and bottom up coding.</p>
+<ul>
+<li>Top down: Decide on the inputs and outputs first, then implement based on that. Then break that down into smaller functions than can be composed in a pipeline.</li>
+<li>Bottom up: write functions the way they <em>should</em> be, as independent things, then fit them together using “adapters” such as <code>bind</code>, <code>map</code> etc</li>
+<li>To parameterise behavior, pass in a function!</li>
+</ul>
+<p>Grouping code: * Types that change together should live together (e.g. in same module) * Functions that change together should live together (e.g. in same module)</p>
+<p>Make illegal states unrepresentable: * use state machines to avoid using <code>option</code> for data which is not used in a particular state * avoid bools * when values change together, group them together (e.g <code>a option and b option</code> becomes <code>(a*b) option</code>)</p>
+<h2 id="setting-up-a-project">Setting up a project</h2>
+<ul>
+<li>Compiler settings: warn unused “-warnon:1182”</li>
+</ul>
+<h2 id="modules-and-namespaces">Modules and namespaces</h2>
+<ul>
+<li>A namespace is just like C#</li>
+<li>A “module” is like a C# class with only static methods</li>
+</ul>
+<p>If defining types only (eg domain), use a namespace. If defining functions, they <em>MUST</em> be in a module (otherwise you get a compiler error)</p>
+<p>For functions closely associated with a type (eg <code>create</code>/<code>value</code>), use a module with the same name as the type.</p>
+<p>NOTES: * You can’t use namespaces in F# interactive * You can use “rec” for recursive modules so that the definitions don’t have to be in order.</p>
+<p>TIP: Open few modules: * Use qualified names so that readers know what you are referencing. Don’t force people to remember things! Eg <code>List.map</code> rather than <code>open List</code> and then using unqualified <code>map</code> later in the file. * You can force this with the <code>[&lt;RequireQualifiedAccess&gt;]</code> attribute on a module! * Also, open modules as close as possible to where they are used (e.g. in a submodule rather than the top of the file)</p>
+<h2 id="signature-files">Signature files</h2>
+<ul>
+<li>have <code>fsi</code> file extension.</li>
+<li>must be above the corresponding <code>fs</code> file.</li>
+</ul>
+<pre><code>|             | FSI              | FS          |
+| top of file | namespace/module | same as FSI |
+| types       | public           | public types must be defined the same |
+|             |                  | private types OK |
+| functions   | use &quot;val&quot;        | use &quot;let&quot;        |</code></pre>
+<p>Example signature file</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>//<span class="co">/ Signature file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> MyDomain<span class="kw">.</span>Dto<span class="kw">.</span>Converter</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ot">open</span> MyDomain</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> DtoError =</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    | BadName</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> MyEntity =</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> fromDomain : MyEntity -&gt; MyEntityDto</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> toDomain : MyEntityDto -&gt; Result&lt;MyEntity,DtoError&gt;</span></code></pre></div>
+<p>Example implementation file</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> MyDomain<span class="kw">.</span>Dto<span class="kw">.</span>Converter</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ot">open</span> MyDomain</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> DtoError =</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    | BadName</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyPrivateType = <span class="dt">string</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> MyEntity =</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> fromDomain <span class="op">(</span>x:MyEntity<span class="op">)</span> :MyEntityDto =</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        failwith <span class="st">&quot;not implemented&quot;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> toDomain <span class="op">(</span>x:MyEntityDto<span class="op">)</span> :Result&lt;MyEntity,DtoError&gt; =</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        failwith <span class="st">&quot;not implemented&quot;</span></span></code></pre></div>
+<h2 id="organising-modules---general">Organising modules - general</h2>
+<p>F# is order sensitive – modules only know about modules above them. This maps nicely to the Onion architecture * core domain is at top * IO near bottom * Main app (composition root/Startup) is always last</p>
+<p>Example module structure:</p>
+<ol type="1">
+<li>Common libraries</li>
+<li>Domain types</li>
+<li>Workflows/use-cases</li>
+<li>DTOs</li>
+<li>DB/Infrastructure</li>
+<li>API interfaces</li>
+<li>Composition Root that combines everything and exposes the API.</li>
+</ol>
+<p>You can use dots in the filename to make the namespace clear: * <code>Common.PrimitiveTypes</code> * <code>Common.Types</code> * <code>MyWorkflow.Types</code> * <code>MyWorkflow.Impl</code></p>
+<p>For example: https://github.com/swlaschin/DomainModelingMadeFunctional/blob/master/src/OrderTaking/OrderTaking.fsproj</p>
+<h3 id="working-with-multiple-assemblies">Working with multiple assemblies</h3>
+<p>If you want to swap out or hide infrastructure, you can use multiple assembles. For example:</p>
+<p><code>MyDomain.Core</code> assembly * Common lib * Domain types * Workflows (with infrastructure dependencies injected in later) * API</p>
+<p><code>MyDomain.Azure</code> assembly * DB/Infrastructure for Azure</p>
+<p><code>MyDomain.AWS</code> assembly * DB/Infrastructure for AWS</p>
+<p><code>MyDomain.Web</code> assembly (top-level assembly) * Composition Root that combines everything and exposes the API</p>
+<h2 id="code-formatting">Code formatting</h2>
+<p><strong>Reading</strong> happens much more than writing, so make it readble first. Make the INTENT understandable During a code review if reader and writer disagree, reader is always right!</p>
+<p>Make blocks obvious style - have only <strong>one</strong> indent per scope change.</p>
+<pre><code>// good
+let xxxx xx xx =
+  xxxx xx xx
+  xxx xx 
+  xxxx xxx
+  xxxx xxx
+  xxxx xx xxxx
+
+// badly indented blocks
+let xxxx xx xx =
+  xxxx xx xx
+    xxx xx 
+   xxxx xxx
+        xxxx xxx
+     xxxx xx xxxx</code></pre>
+<h3 id="function-style">Function style</h3>
+<p>Two styles that I use:</p>
+<ul>
+<li>“stanza” style. Code is divided into related groups like stanzas in poetry.</li>
+<li>“recipe” style. Helper functions are defined (the “ingredients”) and then combined in a pipeline.</li>
+</ul>
+<p>Here’s a “stanza” style function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> &quot;stanza&quot; style</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> myFunction xxx = </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> part 1</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">do</span> this </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  andthen this </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  andthen something <span class="kw">else</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> part 2</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  start a <span class="kw">new</span> thing </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">and</span> some more</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> part 3</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  ...</span></code></pre></div>
+<p>I believe a long function is perfectly fine if everything belongs together – don’t split it up for the sake of it</p>
+<p>Here’s a “recipe” style function:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> &quot;recipe&quot; style</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> myFunction xxx = </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> assemble ingredients</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> helperA = ....</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> helperB = ...</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> helperC = ...</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> then combine the ingredients</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  start</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  |&gt; helperA</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  |&gt; helperB</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  |&gt; helperC</span></code></pre></div>
+<p>If you have a “big recipe” when the “ingredients” are more than one liners, then consider creating a private helper module to put the “ingredients” in.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> <span class="kw">private</span> Ingredients =</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> define ingredients</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> helperA = </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> helperB = </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> helperC = </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>//<span class="co"> bring module into scope</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ot">open</span> Ingredients</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>//<span class="co"> public  </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> myFunction xxx xxx = </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> combine the ingredients defined above</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  start</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  |&gt; helperA</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  |&gt; helperB</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  |&gt; helperC</span></code></pre></div>
+<p>If you’re using signature files and only one workflow per file, the “private” module is the whole <code>fs</code> file, so this approach is not needed.</p>
+<h3 id="format-to-make-diffs-more-readable">Format to make diffs more readable</h3>
+<p>Diffs are an important part of reading so make diffs easy to understand. Changing one thing should cause only one line to change!</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> 1 or 2 fields</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyRecord = <span class="op">{</span> fieldA:<span class="dt">string</span>; fieldB:<span class="dt">int</span> <span class="op">}</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>//<span class="co"> 3 or more fields</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyRecord = <span class="op">{</span>  </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>   fieldA : <span class="dt">string</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>   fieldB : <span class="dt">string</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>   fieldC : <span class="dt">string</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>   fieldD : <span class="dt">string</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>   <span class="op">}</span></span></code></pre></div>
+<p>Use same style for constructing records</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> myRecord = <span class="op">{</span>  </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>   fieldA = <span class="st">&quot;...&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>   fieldB = <span class="st">&quot;...&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>   fieldC = <span class="st">&quot;...&quot;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>   fieldD = <span class="st">&quot;...&quot;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>   <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> enum-style choices</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Colour = Red | Blue | Green</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>//<span class="co"> single case choices</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> CustomerId = CustomerId <span class="kw">of</span> <span class="dt">int</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>//<span class="co"> complex choices   </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Payment = </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>   | Cash</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>   | Check <span class="kw">of</span> CheckNumber</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>   | Card <span class="kw">of</span> CardInfo</span></code></pre></div>
+<h3 id="formatting-match-expressions">Formatting match expressions</h3>
+<p>Line up the vertical bars under the <code>match</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> xxx p = </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">match</span> p <span class="kw">with</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  | CaseA z -&gt; handler...</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  | CaseB z -&gt; handler...</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  | CaseC z -&gt; handler...</span></code></pre></div>
+<p>When the “handlers” for each case become longer than a one-liner, put each handler in a new block underneath:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> xxx p = </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">match</span> p <span class="kw">with</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  | CaseA z -&gt; </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    handler...</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  | CaseB z -&gt; </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    handler...</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  | CaseD z -&gt; </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    handler...</span></code></pre></div>
+<h3 id="formatting-inline-lambdas">Formatting inline lambdas</h3>
+<p>Short ones can go on one line</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aCollection</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>|&gt; List<span class="kw">.</span>map <span class="op">(</span><span class="kw">fun</span> x -&gt; x + <span class="dv">1</span><span class="op">)</span></span></code></pre></div>
+<p>Longer ones may need to start a new block</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>aCollection</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>|&gt; List<span class="kw">.</span>map <span class="op">(</span><span class="kw">fun</span> x -&gt; </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>   xxxxx xxxx</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>   xxxx xxx</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>   <span class="op">)</span></span></code></pre></div>
+<p>Do <em>NOT</em> have “hanging” lambdas. If the top line changes, the indentation of the entire block will change, breaking the “diff” rule above.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> example of BAD indenting. </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>//<span class="co"> If List.map is changed to List.choose, say, the entire block changes which messes up the diff</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>aCollection</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>|&gt; List<span class="kw">.</span>map <span class="op">(</span><span class="kw">fun</span> x -&gt; </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>             xxxxx xxxx</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>             xxxx xxx</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>             <span class="op">)</span></span></code></pre></div>
+<h3 id="formatting-generic-types">Formatting Generic types</h3>
+<p>F# allows generic types to be used as a suffix. Eg <code>'a list</code> or <code>List&lt;'a&gt;</code>.</p>
+<p>Which one to use? Answer: Use suffix form for built-in types such as <code>int list</code>, <code>int seq</code>, <code>int option</code>, <code>int[]</code>. For all others, use C# style form (e.g. <code>Result&lt;T,U&gt;</code>).</p>
+<h2 id="coding-tips">Coding tips</h2>
+<h3 id="use-exhaustive-pattern-matching">Use exhaustive pattern matching</h3>
+<ul>
+<li>Always be explicit and match every pattern</li>
+<li>Avoid using <code>_</code> as a wildcard pattern. Exception needed for matching strings and ints, where you often have to.</li>
+<li>If you do this, the compiler will warn you when new cases are added. If you don’t do this, you will never know!</li>
+</ul>
+<h3 id="avoid-boilerplate">Avoid boilerplate</h3>
+<p>Often there are two similar bits of code but slightly different. In this case, it’s easy to ignore subtle differences.</p>
+<p>FIX: parameterize with a function parameter! This forces differences to be made explicit:</p>
+<ul>
+<li>Example 1: iterating (aka fold) https://youtu.be/E8I19uA-wGY?t=1100</li>
+<li>Example 2: continuations https://youtu.be/E8I19uA-wGY?t=1966</li>
+</ul>
+<h3 id="make-common-errors-obvious">Make common errors obvious</h3>
+<p>Return a <code>Result</code> or <code>Option</code> rather than an exception.</p>
+<p>But don’t use <code>Result</code> for everything!<br />
+* There is a difference between “domain errors” and “panics”. Panics do not need to be exposed in the domain. Throw an exception and catch at a top-level function. * Exceptions can be better than <code>Result</code> if the scope is clear and very local (e.g. drilling down in a tree and throwing to exit in the middle of iteration)</p>
+<p>If you DO throw exceptions as part of the API, make it clear in the name of the function:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>List<span class="kw">.</span>tryHead //<span class="co"> ok</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>List<span class="kw">.</span>headExn //<span class="co"> ok</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>List<span class="kw">.</span>head    //<span class="co"> bad (sadly this is how the standard library does it</span></span></code></pre></div>
+<p>Similarly</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>List<span class="kw">.</span>find      //<span class="co"> bad unless you KNOW that the item exists</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>List<span class="kw">.</span>tryFind   //<span class="co"> good</span></span></code></pre></div>
+<h3 id="complex-type-hacks">Complex type hacks</h3>
+<p>Don’t do it!</p>
+<p>F# has Statically Resolved Type Parameters (SRTP) which can be used to do polymorphism, monads, etc. Don’t!</p>
+<p>KISS - simple is better than complex!</p>
+<h3 id="mutability">Mutability</h3>
+<p>Mutable values are OK if they are local and no one sees them. But don’t go overboard! Purity is one goal but it’s not the only goal.</p>
+<h3 id="operators">Operators</h3>
+<p>Avoid importing operators from other modules. It will be hard for a reader to know where they came from. Instead define operators at the top of module they’re used in (or even just in the function they are used in).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> xxxxx </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>//<span class="co"> define at top</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="op">(</span> &lt;!&gt; <span class="op">)</span> = Validation<span class="kw">.</span>map</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="op">(</span> &lt;*&gt; <span class="op">)</span> = Validation<span class="kw">.</span>apply</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>//<span class="co"> use</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ctor &lt;!&gt; firstParam &lt;*&gt; secondParam</span></code></pre></div>
+<h2 id="oo-code-vs-fp-code">OO code vs FP code</h2>
+<p>It’s OK to use OO style code if <em>behavior</em> is the most important thing – that is, you want polymorphism.</p>
+<p>e.g. in <code>x.ToString()</code> we don’t care what x is. To define methods see https://fsharpforfunandprofit.com/posts/type-extensions/</p>
+<p>But this can mess with type inference :( You might well need to use type annotations more often. See https://fsharpforfunandprofit.com/posts/type-extensions/#methods-dont-play-well-with-type-inference</p>
+<p>Similarly, it’s OK to use interfaces to define groups of functions that can have multiple implementations. See https://fsharpforfunandprofit.com/posts/interfaces/</p>
+<p>Documentation on doing OO in F# is here: https://fsharpforfunandprofit.com/series/object-oriented-programming-in-fsharp.html</p>
+<h2 id="working-with-dictionaries">Working with Dictionaries</h2>
+<pre><code>module DictionaryExample =
+    // needed to reference IDictionary
+    open System.Collections.Generic
+
+    // create a dictionary from a list of pairs
+    let myDict = [ (1,&quot;a&quot;); (2,&quot;b&quot;) ] |&gt; dict
+
+    /// get a value from a dictionary, with dictionary as LAST parameter
+    let tryGetValue key (dict:IDictionary&lt;_,_&gt;) =
+        match dict.TryGetValue(key) with
+        | true, value -&gt; Some value
+        | false,_ -&gt; None
+
+    // this style is used when piping the dictionary into a key check
+    myDict |&gt; tryGetValue 1
+    myDict |&gt; tryGetValue 42
+
+
+    /// get a value from a dictionary, with dictionary as FIRST parameter
+    let tryGetValue2 (dict:IDictionary&lt;_,_&gt;) key =
+        match dict.TryGetValue(key) with
+        | true, value -&gt; Some value
+        | false,_ -&gt; None
+
+    // this style is used when you want to bake in the dictionary
+    // in a helper function and then pass the keys in later
+    let lookup = tryGetValue2 myDict
+    lookup 1
+    lookup 42</code></pre>
+<h2 id="working-with-the-result-type">Working with the Result type</h2>
+<p>If using <code>Result</code>, include this <a href="https://github.com/swlaschin/DomainModelingMadeFunctional/blob/master/src/OrderTaking/Result.fs">Result.fs</a> file at the top of your project.</p>
+<p>I am fine with duplicating this file in many projects to avoid dependencies on nuget or library DLLs.</p>
+<h3 id="to-chain-results-in-series-monads">To chain results in series (“monads”)</h3>
+<p>If the first value is not a <code>Result</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>myValue</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>|&gt; pointsFunctionA</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>|&gt; Result<span class="kw">.</span>bind pointsFunctionB</span></code></pre></div>
+<p>If the first value <em>is</em> a <code>Result</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>myResult</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>|&gt; Result<span class="kw">.</span>bind pointsFunctionA</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>|&gt; Result<span class="kw">.</span>bind pointsFunctionB</span></code></pre></div>
+<h2 id="result-computation-expressions-instead-of-bind">Result computation expressions instead of bind</h2>
+<p>You can use <code>result</code> computation expressions instead of <code>Result.bind</code>:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> finalResult = result <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span>! x = myResult</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span>! y = pointsFunctionA x</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span>! z = pointsFunctionB y</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> z</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<h3 id="to-combine-results-in-parallel-applicatives">To combine results in parallel (“applicatives”)</h3>
+<p>Use the <code>Validation</code> type in <code>Result.fs</code>. It’s the same type as <code>Result</code> but with a <em>list</em> of errors.</p>
+<p>If need to do validation (multiple errors), the validation code has the same pattern * Define a ctor for the type * Create all the values (which return <code>Results</code>) * Option 1: Use the applicative style to construct the object. * First param has <code>&lt;!&gt;</code> in front * Subsequent params have <code>&lt;*&gt;</code> in front * Option 2: Lift the <code>ctor</code> using <code>lift2</code>, <code>lift3</code>, lift4<code>etc., depending on how many parameters the ctor has.    * When validation is complete and you are returning to normal code, consider mapping the list of validation errors to an error case so you have a normal</code>Result` again.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> Option 1: Applicative style</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>//<span class="co"> define at top of file</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="op">(</span> &lt;!&gt; <span class="op">)</span> = Validation<span class="kw">.</span>map</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="op">(</span> &lt;*&gt; <span class="op">)</span> = Validation<span class="kw">.</span>apply</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyError = </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>   | ValidationError <span class="kw">of</span> <span class="dt">string</span> list</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>   | DbError <span class="kw">of</span> <span class="dt">string</span> </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>   | etc</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> createMyObject param1 param2 param3 = </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>   <span class="op">{</span> Field1 = param1; etc ... <span class="op">}</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> param1OrError =  ...validate <span class="kw">and</span> <span class="kw">return</span> a Result</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> param2OrError =  ...validate <span class="kw">and</span> <span class="kw">return</span> a Result</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> param3OrError =  ...validate <span class="kw">and</span> <span class="kw">return</span> a Result</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> myObjectOrError = createMyObject &lt;!&gt; param1OrError &lt;*&gt; param2OrError &lt;*&gt; param3OrError</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>//<span class="co"> convert to a Result&lt;_,MyError&gt; without a list of errors</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>myObjectOrError |&gt; Result<span class="kw">.</span>mapError ValidationError</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>//<span class="co"> Option 2: Using lift</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyError =  ...</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> createMyObject param1 param2 param3 = </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>   <span class="op">{</span> Field1 = param1; etc ... <span class="op">}</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> param1OrError =  ...validate <span class="kw">and</span> <span class="kw">return</span> a Result</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> param2OrError =  ...validate <span class="kw">and</span> <span class="kw">return</span> a Result</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> param3OrError =  ...validate <span class="kw">and</span> <span class="kw">return</span> a Result</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> myObjectOrError = <span class="op">(</span>Validation<span class="kw">.</span>lift3 createMyObject<span class="op">)</span> param1OrError param2OrError param3OrError</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>//<span class="co"> convert to a Result&lt;_,MyError&gt; without a list of errors</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>myObjectOrError |&gt; Result<span class="kw">.</span>mapError ValidationError</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div>
+<p>See also:<br />
+* https://github.com/swlaschin/Railway-Oriented-Programming-Example/blob/master/src/FsRopExample/Dtos.fs#L75</p>
+<h3 id="validating-lists-of-items">Validating lists of items</h3>
+<p>To validate a list, validate each item using <code>List.map</code> and then use <code>Result.sequence</code> to put the <code>Result</code> type on the outside.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> itemsOrError =</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    itemDtos</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    //<span class="co"> convert to F# list</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    |&gt; List<span class="kw">.</span>ofArray</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    //<span class="co"> convert each DTO item to a domain object</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    |&gt; List<span class="kw">.</span>map <span class="op">(</span>ItemDto<span class="kw">.</span>toDomain<span class="op">)</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    //<span class="co"> flip from List&lt;Result&lt;&gt;&gt; to Result&lt;List&lt;&gt;&gt;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    |&gt; Result<span class="kw">.</span>sequence</span></code></pre></div>
+<h2 id="constrained-types">Constrained types</h2>
+<p>Define a type with a private constructor and then a helper module (in same scope) with same name. Helper module should have <code>create</code> and <code>value</code> functions</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> EmailAddress = <span class="kw">private</span> EmailAddress <span class="kw">of</span> <span class="dt">string</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> EmailAddress =</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> create str :Result&lt;EmailAddress,_&gt; =  //<span class="co"> or Option</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> String<span class="kw">.</span>IsNullOrEmpty<span class="op">(</span>str<span class="op">)</span> <span class="kw">then</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>      Error <span class="kw">.</span>..</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">else</span> <span class="kw">if</span> <span class="co">(* check validity *)</span> <span class="kw">then</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>       Ok <span class="op">(</span>EmailAddress str<span class="op">)</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">else</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>       Error <span class="kw">.</span>..</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> value <span class="op">(</span>EmailAddress str<span class="op">)</span> = str</span></code></pre></div>
+<h2 id="dtos-and-validation">DTOs and Validation</h2>
+<p>Define them in their own module. For each DTO, define an associated module with functions “toDomain” and “fromDomain”</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> MyDomain<span class="kw">.</span>Dto</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> MyDto = <span class="op">{</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    Something: <span class="dt">string</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>//<span class="co">/ could be in different module if you want to hide the implementation</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> MyDto = </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>   //<span class="co"> may fail if DTO has bad data</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>   <span class="kw">let</span> toDomain <span class="op">(</span>dto:MyDto<span class="op">)</span> :Validation&lt;MyDomain,ValidationError<span class="op">)</span> =</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>   //<span class="co"> always succeeds   </span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>   <span class="kw">let</span> fromDomain <span class="op">(</span>domainObj:MyDomain<span class="op">)</span> :MyDto =</span></code></pre></div>
+<p>If using validation (multiple errors), the <code>toDomain</code> code has the “applicative” pattern described above. * Define a ctor for the DTO * Create all the values (which return Results) * Use the applicative style to construct the DTO * Map the list of validation errors to an error case</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> toDomainObj dto = </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> ctor = ...</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> firstParam = ... construct from dto.First </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> secondParam = ... construct from dto.Second</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> thirdParam = ...</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> domainObjR = ctor &lt;!&gt; firstParam &lt;*&gt; secondParam &lt;*&gt; thirdParam</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  domainObjR |&gt; Result<span class="kw">.</span>mapError ValidationError</span></code></pre></div>
+<p>See also:<br />
+* https://github.com/swlaschin/Railway-Oriented-Programming-Example/blob/master/src/FsRopExample/Dtos.fs#L75</p>
+<p>If using validation WITHOUT multiple errors, the <code>toDomain</code> code can be simpler:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> toDomainObj dto = </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  result <span class="op">{</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span>! firstParam = ... dto.First</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span>! secondParam = ...</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span>! thirdParam = ...</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    domainObj = normal ctor </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> domainObj</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>See * https://github.com/swlaschin/DomainModelingMadeFunctional/blob/master/src/OrderTaking/PlaceOrder.Dto.fs#L120</p>
+<h2 id="interacting-with-c">Interacting with C</h2>
+<ul>
+<li>Avoid exposing F# types if possible</li>
+<li>NOTE: If <code>Fsharp.Core.dll</code> is missing, use nuget to add package</li>
+</ul>
+<h3 id="exposing-an-api-to-c">Exposing an API to C</h3>
+<ul>
+<li>Expose API in a .NET friendly manner. Add a module called either <code>Api</code> or <code>Api.Csharp</code></li>
+<li>Understand tuple-style vs curried functions. Expose tuple-style only.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> Api =</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> correct</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> DoSomething<span class="op">(</span>x,y,x<span class="op">)</span> = </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  //<span class="co"> incorrect</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> DoSomething x y x = </span></code></pre></div>
+<ul>
+<li>Use C#-compatible collections not F# <code>list</code>
+<ul>
+<li>F# <code>list</code> – not available in C#</li>
+<li>F# <code>int seq</code> – same as <code>IEnumerable&lt;int&gt;</code> in C#</li>
+<li>F# <code>ResizeArray&lt;int&gt;</code> – same as <code>List&lt;int&gt;</code> in C#</li>
+<li>F# <code>int[]</code> – same as <code>Array&lt;int&gt;</code> in C#</li>
+</ul></li>
+<li>Have a CSharpHelper module with useful functions</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> List =</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    //<span class="co"> IEnumerable to F# list</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> EnumToList enum = enum |&gt; List<span class="kw">.</span>ofSeq</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    //<span class="co"> IEnumerable from F# list</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> EnumFromList list = list |&gt; List<span class="kw">.</span>toSeq</span></code></pre></div>
+<ul>
+<li>Use Func&lt;&gt; instead of F# functions</li>
+<li>NOTE: F# Async needs to be converted to C# Task</li>
+<li>NOTE: F# <code>float</code> == C# <code>double</code></li>
+<li>NOTE: C# Enums are not the same as choice/union types</li>
+<li>Don’t expose tuples in Api</li>
+</ul>
+<h3 id="exposing-choice-types-to-c">Exposing choice types to C</h3>
+<p>Create a <code>Match</code> function for each choice type you expose, with a <code>Func</code> for each case. Here’s the one for <code>Result</code>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="ot">module</span> Result =</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> Match<span class="op">(</span>result, onOk:Func&lt;_,_&gt;, onError:Func&lt;_,_&gt;<span class="op">)</span> =</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">match</span> result <span class="kw">with</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        | Ok x -&gt; onOk.Invoke<span class="op">(</span>x<span class="op">)</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        | Error e -&gt; onError.Invoke<span class="op">(</span>e<span class="op">)</span></span></code></pre></div>
+<h2 id="common-compiler-errors">Common compiler errors</h2>
+<ul>
+<li>Inconsistent type. Fix: add type annotations to find where the error is.</li>
+<li>Value restriction. Fix: add a parameter.</li>
+<li>See also https://fsharpforfunandprofit.com/troubleshooting-fsharp/</li>
+</ul>
+<h2 id="common-errors-in-f-interactive">Common errors in F# Interactive</h2>
+<ul>
+<li>Can’t use namespaces in interactive</li>
+<li>Need to explitly refer to other files using #load or #r</li>
+<li>Type mismatch even though you know its the same!
+<ul>
+<li>caused by recompiling one bit without recompiling the other bit</li>
+<li>FIX: recompile the whole thing</li>
+</ul></li>
+</ul>
+</article>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

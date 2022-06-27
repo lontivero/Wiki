@@ -1,4 +1,10 @@
-# Wasabi CoinGraph generation
+---
+title: Wasabi CoinGraph generation
+toc: false
+date: 2019-07-02
+categories: [homepage, index]
+tags: [plan, list]
+...
 
 Create a visual representation from a Wasabi coins dump.
 
@@ -21,11 +27,11 @@ dotnet fsi coinsgraph.fsx | sed -e 's/    ;//' | dot -Tpng | feh  -
 
 ## The result
 
-![](../src/images/tx-graph-example-1.png)
+![](../../src/images/tx-graph-example-1.png)
 
 ## The Code
 
-```fsharp
+```{#mycode .fsharp .numberLines startFrom="100"}
 open System
 open System.IO
 

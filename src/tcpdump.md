@@ -1,4 +1,6 @@
-# How to capture network traffic
+---
+title: How to capture network traffic
+...
 
 Use `tcpdump`. You will need to `sudo` by sure. Example:
 
