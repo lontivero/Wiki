@@ -34,12 +34,10 @@ done
 
 Parse the wasabi log file to find transactions and open each of those in a firefox tab.
 
-```
-ssh zk-production -t "cat ~/.walletwasabi/backend/Logs.txt \
-| grep 'Arena.*Successfully' \
-| awk '{printf (\"https://mempool.space/tx/%s\n\", substr(\$14, length(\$14)-65,64))}'" \
+```bash
+ssh zk-production -t "tail ~/.walletwasabi/backend/WabiSabi/CoinJoinIdStore.txt \
+| sed 's/\(.*\)/https:\/\/mempool.space\/tx\/\1/'" \
 | xargs firefox
-
 ```
 
 ## Convert filters to binay

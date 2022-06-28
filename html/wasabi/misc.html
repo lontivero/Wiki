@@ -149,11 +149,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
 <h3 id="open-recent-cpoinjoins-in-browser">Open recent cpoinjoins in browser</h3>
 <p>Parse the wasabi log file to find transactions and open each of those in a firefox tab.</p>
-<pre><code>ssh zk-production -t &quot;cat ~/.walletwasabi/backend/Logs.txt \
-| grep &#39;Arena.*Successfully&#39; \
-| awk &#39;{printf (\&quot;https://mempool.space/tx/%s\n\&quot;, substr(\$14, length(\$14)-65,64))}&#39;&quot; \
-| xargs firefox
-</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> zk-production <span class="at">-t</span> <span class="st">&quot;tail ~/.walletwasabi/backend/WabiSabi/CoinJoinIdStore.txt </span><span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">| sed &#39;s/\(.*\)/https:\/\/mempool.space\/tx\/\1/&#39;&quot;</span> <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">|</span> <span class="fu">xargs</span> firefox</span></code></pre></div>
 <h2 id="convert-filters-to-binay">Convert filters to binay</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode c#"><code class="sourceCode cs"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> System<span class="op">.</span><span class="fu">IO</span><span class="op">;</span></span>
