@@ -30,7 +30,17 @@ do
 done
 ```
 
+### Open recent cpoinjoins in browser
 
+Parse the wasabi log file to find transactions and open each of those in a firefox tab.
+
+```
+ssh zk-production -t "cat ~/.walletwasabi/backend/Logs.txt \
+| grep 'Arena.*Successfully' \
+| awk '{printf (\"https://mempool.space/tx/%s\n\", substr(\$14, length(\$14)-65,64))}'" \
+| xargs firefox
+
+```
 
 ## Convert filters to binay
 
