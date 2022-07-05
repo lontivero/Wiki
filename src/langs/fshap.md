@@ -6,3 +6,5 @@ title: F# language
 
 ###  [Mini Bitcoin Wallet](mini_bitcoin_wallet) 
 
+###  [Shamir Secret Sharing](shamir_secret_sharing)
+

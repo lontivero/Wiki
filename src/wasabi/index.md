@@ -3,6 +3,8 @@ title: Wasabi Wallet
 toc: false
 ...
 
+###  [Wasabi Lucas' Vision](wasabi_lucas_vision)
+
 ###  [Install script](wasabi_install_script)
 
 ###  [Wasabi CLI](wcli)
