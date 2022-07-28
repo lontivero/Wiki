@@ -10,6 +10,8 @@ title: My knowledge base
 
  [Bitcoin](bitcoin)
  
+ [Nix](nix)
+ 
  [Research](research)
  
  Languages
