@@ -10,7 +10,7 @@ Create a visual representation from a Wasabi coins dump.
 
 ## Prerequisite
 
-Before start make sure you have the [Wasabi CLI](wcli) 
+Before start make sure you have the [Wasabi CLI](https://github.com/lontivero/Wiki/blob/master/src/wasabi/wcli.m) 
 
 ## How to run it
 
