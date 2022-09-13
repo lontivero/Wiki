@@ -47,8 +47,7 @@ $ ./wcli.sh getnewaddress "Ricardo"                                             
     "Ricardo"
   ],
   "publicKey": "032de9254c8ea96cb6d83e680336ed3abb9b3095b69635c422106d9e5d4df07d72",
-  "p2wpkh": "0014aa3e6534f22fcfafae064961b6ced66e527e2cf1"
-}
+  "p2wpkh": "0014aa3e6534f22fcfafae064961b6ced66e527e2cf1"}
 
 ```
 

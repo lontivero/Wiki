@@ -133,7 +133,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <nav id="TOC">
 <h1 class="toc-title">Contents</h1>
 <ul>
-<li><a href="#wasabi-command-line-interface-cli">Wasabi Command Line Interface (cli)</a>
+<li><a href="#wasabi-command-line-interface-cli">Wasabi Command Line
+Interface (cli)</a>
 <ul>
 <li><a href="#prerequisites">Prerequisites</a></li>
 <li><a href="#examples">Examples</a>
@@ -147,10 +148,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </nav>
 <hr>
-<h1 id="wasabi-command-line-interface-cli">Wasabi Command Line Interface (cli)</h1>
-<p>A tiny bash script to effortless interaction with Wasabi RPC Server.</p>
+<h1 id="wasabi-command-line-interface-cli">Wasabi Command Line Interface
+(cli)</h1>
+<p>A tiny bash script to effortless interaction with Wasabi RPC
+Server.</p>
 <h2 id="prerequisites">Prerequisites</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+x wcli</span></code></pre></div>
 <h2 id="examples">Examples</h2>
 <h3 id="dump-all-the-coins">Dump all the coins</h3>
@@ -179,11 +183,11 @@ datetime                   height   amount     tx                               
     &quot;Ricardo&quot;
   ],
   &quot;publicKey&quot;: &quot;032de9254c8ea96cb6d83e680336ed3abb9b3095b69635c422106d9e5d4df07d72&quot;,
-  &quot;p2wpkh&quot;: &quot;0014aa3e6534f22fcfafae064961b6ced66e527e2cf1&quot;
-}
+  &quot;p2wpkh&quot;: &quot;0014aa3e6534f22fcfafae064961b6ced66e527e2cf1&quot;}
 </code></pre>
 <h2 id="the-code">The Code</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span><span class="fu"> config_extract()</span> <span class="kw">{</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="va">$(</span><span class="fu">cat</span> ~/.walletwasabi/client/Config.json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span><span class="va">)</span></span>
