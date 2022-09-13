@@ -127,7 +127,7 @@ linked or not.</p>
 then others have to register my inputs/outputs/signature, what means
 that wallets needs to speak one each other. Moreover, wallets should
 send the same request to more than one peer.</p>
-<p><img src="../../html/images/p2p.png" /></p>
+<p><img src="../../src/images/p2p.png" /></p>
 <p>We can say that we have the exact same problem that before because
 the communication with our peers has to be also annonymous and that
 requires Tor circuits, one for each request so my peer cannot link my
@@ -175,7 +175,11 @@ anymore then Tor is not the only alternative.</p>
 <h1 id="preliminar-conclusion">Preliminar conclusion</h1>
 <p>A peer-to-peer network, as mentioned in the <a
 href="wasabito.html">wasabito vision document</a> is not only critical
-for P2EP but also</p>
+for P2EP and for payjoins in coinjoins, unlinkeable payments and similar
+schemes but also for removing one of the greater source of
+unreliability: the Tor circuit management to guarantee identities
+isolation and request scheduling for preventing network timing
+analysis.</p>
 </article>
 <script>hljs.highlightAll();</script>
 </body>

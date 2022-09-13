@@ -89,6 +89,10 @@ no mandatory and, following the same reasoning, if Tor circuits are not necessar
 
 # Preliminar conclusion
 
-A peer-to-peer network, as mentioned in the  [wasabito vision document](wasabito) is not only critical for P2EP but also
+A peer-to-peer network, as mentioned in the  [wasabito vision document](wasabito) is not only critical for P2EP and 
+for payjoins in coinjoins, unlinkeable payments and similar schemes but also for removing one of the greater source of
+unreliability: the Tor circuit management to guarantee identities isolation and request scheduling for preventing
+network timing analysis.
+
 
 

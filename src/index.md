@@ -15,6 +15,7 @@ title: My knowledge base
  [Research](research)
  
  Languages
+
  * [bash](langs/bash)
  * [F#](langs/fshap)
  * [Python](langs/python)
