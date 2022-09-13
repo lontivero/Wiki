@@ -58,7 +58,7 @@ requires wabisabi (and tor control) that we already have.
 
 # Reliability
 
-See: [Reliavility](wasabito_network_reliability)
+See: [Reliability](wasabito_network_reliability)
 
 
 # Wasabi client/service should NOT depend on a server
