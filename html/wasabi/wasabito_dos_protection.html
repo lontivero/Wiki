@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.2 — by Tristano Ajmone
+==============================================================================
+Copyright © Tristano Ajmone, 2017-2020, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License
+
+Copyright (c) Tristano Ajmone, 2017-2020 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017-2020,
+released under the MIT License (MIT); it contains readaptations of substantial
+portions of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Application Layer Denial of Service Protection</title>
+  <style type="text/css">
+@charset "UTF-8";.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#24292e;font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:16px;line-height:1.5;word-wrap:break-word;box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}.markdown-body a{color:#0366d6;background-color:transparent;text-decoration:none;-webkit-text-decoration-skip:objects}.markdown-body a:active,.markdown-body a:hover{outline-width:0}.markdown-body a:hover{text-decoration:underline}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body strong{font-weight:600}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1{font-size:2em;margin:.67em 0;padding-bottom:.3em;border-bottom:1px solid #eaecef}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid #eaecef}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#6a737d}.markdown-body img{border-style:none}.markdown-body svg:not(:root){overflow:hidden}.markdown-body hr{box-sizing:content-box;height:.25em;margin:24px 0;padding:0;overflow:hidden;background-color:#e1e4e8;border:0}.markdown-body hr::before{display:table;content:""}.markdown-body hr::after{display:table;clear:both;content:""}.markdown-body input{margin:0;overflow:visible;font:inherit;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}.markdown-body *{box-sizing:border-box}.markdown-body blockquote{margin:0}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dd{margin-left:0}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body code{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace}.markdown-body pre{font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;word-wrap:normal}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #dfe2e5}.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body code{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}.markdown-body code::after,.markdown-body code::before{letter-spacing:-.2em;content:" "}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code::after,.markdown-body pre code::before{content:normal}.markdown-body .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}.markdown-body kbd{box-shadow:inset 0 -1px 0 #959da5;display:inline-block;padding:3px 5px;font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;color:#444d56;vertical-align:middle;background-color:#fcfcfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5}.markdown-body :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:3px}.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}.markdown-body::before{display:table;content:""}.markdown-body::after{display:table;clear:both;content:""}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.Alert,.Error,.Note,.Success,.Warning{padding:11px;margin-bottom:24px;border-style:solid;border-width:1px;border-radius:4px}.Alert p,.Error p,.Note p,.Success p,.Warning p{margin-top:0}.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child{margin-bottom:0}.Alert{color:#246;background-color:#e2eef9;border-color:#bac6d3}.Warning{color:#4c4a42;background-color:#fff9ea;border-color:#dfd8c2}.Error{color:#911;background-color:#fcdede;border-color:#d2b2b2}.Success{color:#22662c;background-color:#e2f9e5;border-color:#bad3be}.Note{color:#2f363d;background-color:#f6f8fa;border-color:#d5d8da}.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{color:#246;margin-bottom:0}.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{color:#4c4a42;margin-bottom:0}.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{color:#911;margin-bottom:0}.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{color:#22662c;margin-bottom:0}.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{color:#2f363d;margin-bottom:0}.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{margin-top:0}h1.title,p.subtitle{text-align:center}h1.title.followed-by-subtitle{margin-bottom:0}p.subtitle{font-size:1.5em;font-weight:600;line-height:1.25;margin-top:0;margin-bottom:16px;padding-bottom:.3em}div.line-block{white-space:pre-line}
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="highlight/styles/default.min.css">
+  <link rel="stylesheet" href="none.css">
+    <script src="highlight/highlight.min.js"></script>
+</head>
+<body>
+<article class="markdown-body">
+<a href="index.html">Wiki Home</a>
+<header>
+<h1 class="title">Application Layer Denial of Service Protection</h1>
+</header>
+<hr>
+<nav id="TOC">
+<h1 class="toc-title">Contents</h1>
+<ul>
+<li><a href="#whats-a-denial-of-service-attack">What’s a Denial of
+Service attack?</a></li>
+<li><a href="#types-of-dos-attacks">Types of DoS attacks</a>
+<ul>
+<li><a
+href="#distributed-denial-of-service-attacks-transport-layer">(Distributed)
+Denial of Service Attacks (@ Transport Layer)</a></li>
+<li><a
+href="#specialized-denial-of-service-attacks-application-layer">Specialized
+Denial of Service Attacks (@ Application Layer)</a></li>
+</ul></li>
+<li><a href="#how-to-attack-wasabi">How to attack Wasabi</a>
+<ul>
+<li><a href="#do-not-sign">Do not sign</a></li>
+<li><a href="#spend-the-participating-coin">Spend the participating
+coin</a>
+<ul>
+<li><a href="#spend-during-signing-phase">Spend during signing
+phase</a></li>
+<li><a href="#spend-after-transaction-broadcasted">Spend after
+transaction broadcasted</a></li>
+<li><a href="#partial-conclusion">Partial conclusion</a></li>
+<li><a href="#what-other-are-doing">What other are doing</a></li>
+</ul></li>
+<li><a href="#banning-offening-coins">Banning offening coins</a>
+<ul>
+<li><a href="#to-ban-the-offender">To ban the offender</a></li>
+<li><a href="#to-ban-the-offender-and-all-its-descendants">To ban the
+offender and all its descendants</a></li>
+<li><a href="#how-long-to-ban">How long to ban</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<hr>
+<h1 id="whats-a-denial-of-service-attack">What’s a Denial of Service
+attack?</h1>
+<p>A Denial-of-Service (DoS) attack is an attack meant to prevent the
+provision of a given service. A very complete explanation of the subject
+is available in <a
+href="https://en.wikipedia.org/wiki/Denial-of-service_attack">wikipedia</a>
+but there are a very few concepts that are important to have in
+mind.</p>
+<h1 id="types-of-dos-attacks">Types of DoS attacks</h1>
+<p>Lets start by saying that there are two main kind of DoS attack that
+a <strong>centralized</strong> coordinator should try to mitigate:</p>
+<h2
+id="distributed-denial-of-service-attacks-transport-layer">(Distributed)
+Denial of Service Attacks (@ Transport Layer)</h2>
+<p>This is by far the most common type of attack and consists on a
+flooding the target with traffic. Given it is generally speaking a
+transport layer attack, it is generic attack that can be performed using
+general-use tools.</p>
+<p>It is also a cheap attack that is provided as a service by criminal
+groups who control botnets. That means that anyone can pay for attacking
+any server and it doesn’t require to have any kind of knowledge.</p>
+<p>Its <strong>generic</strong> nature allows the system adminitrator to
+mitigate it using <strong>generic</strong> infrastructure meassures like
+a firewall.</p>
+<h2
+id="specialized-denial-of-service-attacks-application-layer">Specialized
+Denial of Service Attacks (@ Application Layer)</h2>
+<p>This is the kind of attack that can be performed only by those who
+understand how the system works and are motivated to invest time and
+knowledge to design an attack for disrupting one specific target. It can
+be achieved by reviewing the code and find programming errors or simply
+by understanding the dynamics of the system.</p>
+<p>By its <strong>specialized</strong> nature it requires the
+application to be designed with attacks in mind and to implement
+counter-meassures that can mitigate the impact of such attacks. This is
+the type of attack that we want to discuss here.</p>
+<h1 id="how-to-attack-wasabi">How to attack Wasabi</h1>
+<p>It is necessary to understand how Wasabi can be attacked in order to
+implement the prevention mechanism; otherwise how could we possible know
+what to design for?</p>
+<h2 id="do-not-sign">Do not sign</h2>
+<p>The most obvious attack consists registering a coin for participating
+in a coinjoin but refuse to sign the coinjoin transaction. This can be
+repeated as many times as coins you have, in fact, each coin can be used
+to attack twice.</p>
+<p>This attack is the simplest one because it doesn’t require any real
+technical/programming knowledge, or at least not at senior level. It is
+also an attack for free because it doesn’t affect the attacker balance
+at all.</p>
+<p>The good news is that <code>Wasabi 2</code> is not specially
+vulnerable to this naïve attack because:</p>
+<ul>
+<li>it bans the offending coin,</li>
+<li>it runs a blame round with the remaining <code>whitelisted</code>
+coins,</li>
+<li>it runs many rounds in parallel,</li>
+<li>it runs rounds frequently (In WW 1 this was nto the case)</li>
+</ul>
+<h2 id="spend-the-participating-coin">Spend the participating coin</h2>
+<p>Another trivial attack is simply to register a coin for participating
+in a coinjoin but spending it before the coordination process finishes.
+In this case it is possible to disrupt a round but at least it is not
+for free, given the attacker has to pay the network fee.</p>
+<div class="Note">
+<p>Before continuing let me say that <code>Wasabi 2</code> allows users
+to spend the registered coin without needing to unregister them first
+because in case the coordinator detects one participating coin has been
+spent, it simple removes that coin from the round except in the case of
+being in the critical phase (signing). This improves the reliability of
+the rounds by shortening the window of time that can be used to disrupt
+the round.</p>
+</div>
+<p>It is still possible to spend the coin in two critical moments:</p>
+<h3 id="spend-during-signing-phase">Spend during signing phase</h3>
+<p>Once the client is notified the round phased changed to signing phase
+it can sign the coinjoin transaction and the spend coin. In fact, in
+order to maximize the effectiveness of the attack the attacker client
+can wait until enough peers have signed before executing spending:
+otherwise it could happen that she self spends her participating coin
+but someone else failed to sign and then she would have paid to disrupt
+a round that would have never happened anyway. Note that in this case it
+will not disrupt the blame round neither because it will be removed from
+the <code>whitelist</code> as soon the coordinator
+<code>input registration</code>.</p>
+<h3 id="spend-after-transaction-broadcasted">Spend after transaction
+broadcasted</h3>
+<p>The attacker can sign the coinjoin transaction and perform
+high-frequency requests to the wabisabi’s <code>status</code> endpoint
+to see when <strong>all</strong> the required signatures have been
+provided and when that happens (the coinjoin transaction is
+completed/can be broadcasted) the attacker that previously connected to
+a big number of bitcoins nodes in the network can broadcast a
+transaction that spends the participating coin.</p>
+<p>In this case, as well as in the previous one, it is the bitcoin
+network the one that will reject the broadcasted coinjoin
+transaction.</p>
+<h3 id="partial-conclusion">Partial conclusion</h3>
+<p>Spending the participating coin is a simple and effective DoS attack
+against Wasabi that is <strong>even in its basic form quite
+cheap</strong> in terms of the amount of bitcoins required to perform it
+(5000 sats).</p>
+<div class="Note">
+<p>As any specialized attack, it can be cheap in terms of the amount of
+bitcoins required but expensive in terms of the effort/knowledge the
+attacker must invest and the opportunity cost that that represent. This
+is IMO the reason why we have never seen an attack of this kind.</p>
+</div>
+<h3 id="what-other-are-doing">What other are doing</h3>
+<p>This kind of attacks affect most multiparty transactions and
+specially lightning (see: <a
+href="https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/020557.html">Playing
+with full-rbf peers for fun and L2s security</a>) There have been many
+discussion about supporting <strong>full-rbf</strong> a-la Bitcoin Knots
+so, the transaction that is minded is simply the one that pays more.
+That would allow coordinators to compete against attackers by fee or
+inflict them a greater economic damage.</p>
+<h2 id="banning-offening-coins">Banning offening coins</h2>
+<p>The general approach to prevent <strong>future</strong> disruptions
+by the same actor is by banning the coin used in the attack. Of course
+it is important to be able to identify which coin was used, that’s the
+first thing to do:</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 21%" />
+<col style="width: 16%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Is it a clear attack?</th>
+<th>Is being detected?</th>
+<th>Can be detected? How?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spent during non-critical p.</td>
+<td>No. It’s Ok.</td>
+<td>Yes. No problem</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Did not sign</td>
+<td>No. But keep an eye on it</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Spent during critical phase</td>
+<td>It seems so, yes.</td>
+<td>No</td>
+<td>Yes, check again against the node (mempool)</td>
+</tr>
+<tr class="even">
+<td>Spent after tx broadcasted</td>
+<td>Yes</td>
+<td>No</td>
+<td>Yes, listen for txs double spending cj inputs</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="Alert">
+<p>As we can see there are <strong>two</strong> attack vectors we are
+not even detecting!</p>
+</div>
+<h3 id="to-ban-the-offender">To ban the offender</h3>
+<p>In case of detecting an attack (or a misbehaving coin), depending on
+the type of conduct it is involved (see table above) we<br />
+have to ban it in order to prevent that coin from continue participating
+in next rounds.</p>
+<p>In some cases like those in which the coin failed to sign it could
+convenient to ban the coin but give an opportunity to its
+descendants.</p>
+<h3 id="to-ban-the-offender-and-all-its-descendants">To ban the offender
+and all its descendants</h3>
+<p>However, in other cases it could worth to consider banning
+<code>n</code> future generations so, even if an attacker self spends
+the offending coin to continue attacking the rounds, those new coins
+will be already considered invalid to participate.</p>
+<p>This mechanism requires to check all future transaction and see if at
+least one banned coin is being spent by it and in case that’s the case
+then ban all the outputs of that transaction (this is how Wasabi 1
+works)</p>
+<h3 id="how-long-to-ban">How long to ban</h3>
+<p>The <code>severity</code> of the penalty should take into account the
+type of infringement, the reinsidence and the amount involved.</p>
+</article>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

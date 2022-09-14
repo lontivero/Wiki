@@ -1,13 +1,15 @@
 ---
 title: Wasabito
-tags: [plan, list]
+summary: |
+
+   :::::::: Warning ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+   Note: not too long ago I shared a harsher version of this same content with the zkSNACKs internal staff.
+   That document was for the team and for that reason a harsh language was okay but sadly for that same reason it is not publishable so,
+   here I want to share the core ideas expressed at that time.
+   :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ...
 
-:::::::: Warning ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Note: not too long ago I shared a harsher version of this same content with the zkSNACKs internal staff.
-That document was for the team and for that reason a harsh language was okay but sadly for that same reason it is not publishable so,
-here I want to share the core ideas expressed at that time.
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 I've commented many times to different people inside as well as outside zkSNACKs how my vision about what Wasabi should be is quite
@@ -151,4 +153,8 @@ the binaries for any of those.
 Deployments should be done with some kind of "one-click" (or "one command line command"), ideally with something like nixops.
 It could be good to consider building deterministic docker containers with the coordinator.
 
+---------
 
+# An overview of the tasks
+
+See: [Tasks](wasabito_tasks)

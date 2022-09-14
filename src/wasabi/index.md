@@ -3,7 +3,7 @@ title: Wasabi Wallet
 toc: false
 ...
 
-###  [Wasabi Lucas' Vision](wasabito)
+###  [Wasabito](wasabito)
 
 ###  [Install script](wasabi_install_script)
 
