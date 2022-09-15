@@ -193,8 +193,8 @@ if (offendingTxo.Any())
 * Second, when the coordinator receives a new block.
 
 This could sound redundant but as discussed in [Spend after transaction broadcasted], the attack consists precisely on making part of the network
-to know about one transaction while other part of the network knows the coinjoin transaction. That means that own node, once it accepted our
-coinjoin transaction, will reject the attacker transactions as a double-spending attack and then the coordinator will never know about it.
+to know about one transaction while other part of the network knows the coinjoin transaction. That means that our node, after it accepted our
+coinjoin transaction, will reject the attacker transaction as a double-spending attempt and then the coordinator will never know about it.
 
 By inspecting the inputs spent in the confirmed transactions we can detect the existence of one ongoing attack and ban all the descendants of
 the attaching coin.

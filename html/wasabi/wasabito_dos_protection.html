@@ -414,9 +414,9 @@ switching phases:</p>
 href="#spend-after-transaction-broadcasted">Spend after transaction
 broadcasted</a>, the attack consists precisely on making part of the
 network to know about one transaction while other part of the network
-knows the coinjoin transaction. That means that own node, once it
-accepted our coinjoin transaction, will reject the attacker transactions
-as a double-spending attack and then the coordinator will never know
+knows the coinjoin transaction. That means that our node, after it
+accepted our coinjoin transaction, will reject the attacker transaction
+as a double-spending attempt and then the coordinator will never know
 about it.</p>
 <p>By inspecting the inputs spent in the confirmed transactions we can
 detect the existence of one ongoing attack and ban all the descendants
