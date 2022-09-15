@@ -247,3 +247,5 @@ project and removes the rest.
 * CoinJoinClient process as continuation
 * Make the Std, RangeProofs a function of liquidity
 
+[Unify credentials](wasabito_kvac_unification)
+

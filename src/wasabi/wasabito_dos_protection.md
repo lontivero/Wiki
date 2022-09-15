@@ -1,5 +1,5 @@
 ---
-title: Application Layer Denial of Service Protection
+title: Denial of Service Protection
 ...
 
 
@@ -111,6 +111,9 @@ L2s security](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2022-June/
 about supporting **full-rbf** a-la Bitcoin Knots so, the transaction that is minded is simply the one that pays more. That would allow
 coordinators to compete against attackers by fee or inflict them a greater economic damage.
 
+
+# How to protect Wasabi
+
 ## Banning offening coins
 
 The general approach to prevent **future** disruptions by the same actor is by banning the coin used in the attack. Of course it is
@@ -145,6 +148,75 @@ ban all the outputs of that transaction (this is how Wasabi 1 works)
 
 ### How long to ban
 
-The `severity` of the penalty should take into account the type of infringement, the reinsidence and the amount involved.
+The `severity` of the penalty should take into account the type of infringement, the reinsidence and the amount involved. One possible 
+alternative would be to introduce a penalty unit: `btc/hr`. For example, imagine we stabish the standard severity as 10btc/hrs
+so, if the offending coin is 1btc then it should be banned for 10hrs, if the offending coin is 5btc then it should be banned for 2hrs.
+A 5000 sats coin used in an attach should be banned for 200,000hrs (forever). These are just examples, the real severity can be adjusted.
 
+## Implementation
+
+According to what we have just seen there are two specific points where an attack should be monitored:
+
+* First, when the coordinator receives a transaction from the p2p network:
+
+
+```c#
+void OnTransactionArrivedFromP2PNetwork(Transaction tx)
+{
+   var disruptedRounds = ActiveRounds
+           .SelectMany(r => r.Alices.Select(a => (Round:r, Alice:a))
+           .Where(x => tx,Inputs.Contains(x.Alice.Coin.Outpoint)))
+           .GroupBy(x => x.Round);
+   
+   foreach(var (round, offenders) in disruptedRounds)
+   {
+      round.Disrupted(by: offenders);
+   }
+}
+```
+
+Alternatively it could be checked in a less efficient way immediately before broadcasting the coinjoin transaction as it is done before switching phases:
+
+```c#
+var offendingTxo = CheckTxoSpendStatusAsync(round);
+if (offendingTxo.Any())
+{
+    Prison.Ban(offendingTxo);
+	GoToBlameRound(); 
+}
+
+// Broadcasting.
+
+```
+
+
+* Second, when the coordinator receives a new block.
+
+This could sound redundant but as discussed in [Spend after transaction broadcasted], the attack consists precisely on making part of the network
+to know about one transaction while other part of the network knows the coinjoin transaction. That means that own node, once it accepted our
+coinjoin transaction, will reject the attacker transactions as a double-spending attack and then the coordinator will never know about it.
+
+By inspecting the inputs spent in the confirmed transactions we can detect the existence of one ongoing attack and ban all the descendants of
+the attaching coin.
+
+
+```c#
+void OnBlockArrivedFromP2PNetwork(Block block)
+{
+   var allInputsInBlock =  block.Transactions.SelectMany(t => t.Inputs).ToHashSet();
+
+   var disruptedCoinjoins = UnConfirmedCoinJoinTransactions
+           .SelectMany(cj => cj.Inputs.Select(i => (Tx:cj, Input:i))
+           .Where(x => allInputsInBlock.Contains(x.Input)))
+           .GroupBy(x => x.Tx);
+   
+   foreach(var (cj, offendingInputs) in disruptedCoinjoins)
+   {
+      Prision.Ban(offendingInputs);
+      // remove cj from unconfirmedCoinjoins list because it will never confirm.
+   }
+}
+```
+
+----
 
