@@ -52,20 +52,102 @@ what also assumes the usage fo HTTP protocol and so on.
 Protecting a http server from generic DDoS attacks is very difficult and it can lead us to set an intermediary
 like Cloudflare with all what that means.
 
-![](../../src/images/wasabi_clearnet_backup.png)
+```{.dot render="dot -Tsvg -o %o.svg %i"
+         img="../../src/images/wasabi_network"
+         out="/home/lontivero/Documents/Wiki/src/images" }
+digraph G {
+	fontname="Helvetica,Arial,sans-serif"
+	node [fontname="Helvetica,Arial,sans-serif"]
+	edge [fontname="Helvetica,Arial,sans-serif"]
+	
+    subgraph cluster_0 {
+       node [style=filled]
+       "client1"
+       "client2";
+       "client3";
+       
+       label = "clients";
+    }
+
+    subgraph cluster_2 {
+       node [shape = rectangle]
+       "exit node" -> "cloudflare";
+
+       label = "clearnet";
+    }
+    
+    subgraph cluster_3 {
+       node [label="coordinator"] "cc";
+    }
+    
+    "client1" -> cc;
+    "client2" -> cc;
+    "client3" -> cc;
+    
+    "cloudflare" -> cc;
+    
+    "client1" -> "exit node";
+    "client2" -> "exit node";
+    "client3" -> "exit node";
+
+}
+```
  - This is how Wasabi network looks like
 
 Wasabito should be agnostic in terms of network technology and I assume the most common setup would be 
 as an onion service.
 
-![](../../src/images/wasabito_simplified_network.png)
+```{.dot render="dot -Tsvg -o %o.svg %i"
+         img="../../src/images/wasabito_simplified_network"
+         out="/home/lontivero/Documents/Wiki/src/images" }
+digraph G {
+	fontname="Helvetica,Arial,sans-serif"
+	node [fontname="Helvetica,Arial,sans-serif"]
+	edge [fontname="Helvetica,Arial,sans-serif"]
+	
+    subgraph cluster_0 {
+       node [style=filled]
+       "client1"
+       "client2";
+       "client3";
+       
+       label = "clients";
+    }
+
+
+    subgraph cluster_3 {
+       node [label="coordinator"] "cc";
+    }
+    
+    "client1" -> cc;
+    "client2" -> cc;
+    "client3" -> cc;   
+}
+```
   - This is the first goal
 
 Last, the absolutely final goal should be to remove the distinction between client and coordinator by making
 every client a coordinator so you can run your own coordinator at night and mix with the friends that you
 have in your contact list, and the friends of them.
 
-![](../../src/images/wasabito_envisioned_p2p_network.png)
+```{.dot render="dot -Tsvg -o %o.svg %i"
+         img="../../src/images/wasabito_envisioned_network"
+         out="/home/lontivero/Documents/Wiki/src/images" }
+digraph G {
+	fontname="Helvetica,Arial,sans-serif"
+	node [fontname="Helvetica,Arial,sans-serif"]
+	edge [fontname="Helvetica,Arial,sans-serif"]
+	
+       node [label="client1 / coordinator1"] "client1";
+       node [label="client2 / coordinator2"] "client2";
+       node [label="client3 / coordinator3"] "client2";
+
+    "client1" -> "client2" -> "client3";
+    "client3" -> "client2" -> "client1";
+    "client1" -> "client3"
+    "client3" -> "client1"
+}
+```
 
 #### Remove Wallet backup
 

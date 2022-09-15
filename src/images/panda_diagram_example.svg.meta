@@ -1,0 +1,41 @@
+source: 333b13c07613939c3d46201a42cef14cfc14b61c
+render: dot -Tsvg -o %o.svg %i
+img: ../../src/images/panda_diagram_example
+out: /home/lontivero/Documents/Wiki/src/images/panda_diagram_example
+
+digraph G {
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif"]
+    edge [fontname="Helvetica,Arial,sans-serif"]
+    
+    subgraph cluster_0 {
+       node [style=filled]
+       "client1"
+       "client2";
+       "client3";
+       
+       label = "clients";
+    }
+
+    subgraph cluster_2 {
+       node [shape = rectangle]
+       "exit node" -> "cloudflare";
+
+       label = "clearnet";
+    }
+    
+    subgraph cluster_3 {
+       node [label="coordinator"] "cc";
+    }
+    
+    "client1" -> cc;
+    "client2" -> cc;
+    "client3" -> cc;
+    
+    "cloudflare" -> cc;
+    
+    "client1" -> "exit node";
+    "client2" -> "exit node";
+    "client3" -> "exit node";
+
+}

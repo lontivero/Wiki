@@ -1,0 +1,19 @@
+source: 25691cbf91192aabe953fce88c0327a6a65649a7
+render: dot -Tsvg -o %o.svg %i
+img: ../../src/images/wasabito_envisioned_network
+out: /home/lontivero/Documents/Wiki/src/images/wasabito_envisioned_network
+
+digraph G {
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif"]
+    edge [fontname="Helvetica,Arial,sans-serif"]
+    
+       node [label="client1 / coordinator1"] "client1";
+       node [label="client2 / coordinator2"] "client2";
+       node [label="client3 / coordinator3"] "client2";
+
+    "client1" -> "client2" -> "client3";
+    "client3" -> "client2" -> "client1";
+    "client1" -> "client3"
+    "client3" -> "client1"
+}

@@ -2,6 +2,7 @@
 title: Application Layer Denial of Service Protection
 ...
 
+
 # What's a Denial of Service attack?
 
 A Denial-of-Service (DoS) attack is an attack meant to prevent the provision of a given service. 
@@ -123,7 +124,7 @@ important to be able to identify which coin was used, that's the first thing to 
 | Spent after tx broadcasted  | Yes                       | No                 | Yes, listen for txs double spending cj inputs |
 |                             |                           |                    |                                               |
 
-:::::::: Alert :::::::::::::
+:::::::: Error :::::::::::::
 As we can see there are **two** attack vectors we are not even detecting!
 :::::::::::::::::::::::::::
 

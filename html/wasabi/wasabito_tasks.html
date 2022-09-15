@@ -128,18 +128,23 @@ and so on.</p>
 <p>Protecting a http server from generic DDoS attacks is very difficult
 and it can lead us to set an intermediary like Cloudflare with all what
 that means.</p>
-<p><img src="../../src/images/wasabi_clearnet_backup.png" /> - This is
-how Wasabi network looks like</p>
+<p><img src="../../src/images/wasabi_network.svg" class="dot" /></p>
+<ul>
+<li>This is how Wasabi network looks like</li>
+</ul>
 <p>Wasabito should be agnostic in terms of network technology and I
 assume the most common setup would be as an onion service.</p>
-<p><img src="../../src/images/wasabito_simplified_network.png" /> - This
-is the first goal</p>
+<p><img src="../../src/images/wasabito_simplified_network.svg"
+class="dot" /></p>
+<ul>
+<li>This is the first goal</li>
+</ul>
 <p>Last, the absolutely final goal should be to remove the distinction
 between client and coordinator by making every client a coordinator so
 you can run your own coordinator at night and mix with the friends that
 you have in your contact list, and the friends of them.</p>
-<p><img
-src="../../src/images/wasabito_envisioned_p2p_network.png" /></p>
+<p><img src="../../src/images/wasabito_envisioned_network.svg"
+class="dot" /></p>
 <h4 id="remove-wallet-backup">Remove Wallet backup</h4>
 <p>Wallet json files backup was introduced in Wasabi many years ago
 because some wallets got corrupted. That’s something that doesn’t happen
