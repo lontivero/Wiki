@@ -12,7 +12,7 @@ open System.IO
 
 type TWallet = {
     Mnemonic: Mnemonic
-    Network: Network
+    [Network](Network.md): Network
     }
 
 let recoverWallet (mnemonic: Mnemonic) (network:Network) =

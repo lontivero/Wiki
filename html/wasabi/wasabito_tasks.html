@@ -169,7 +169,7 @@ href="https://es.cointelegraph.com/news/bug-on-kraken-let-users-buy-bitcoin-2k-c
 on Kraken Let Users Buy Bitcoin at Levels Below Market Price</a></li>
 <li>see: just <em>google it</em>, there are many of these cases</li>
 </ul>
-<div class="Alert">
+<div class="Warning">
 <p>If you provide these rates to your users and they lose money then
 <strong>you</strong> will be culprit!</p>
 </div>
@@ -232,43 +232,58 @@ people use it, it only provides blocks and fee estimations.</p>
 and removes the rest.</p>
 <ul>
 <li>Remove website</li>
-<li>Change GPG public key</li>
+</ul>
+<p>Having a website for one specific company as part of the project
+makes no sense for an FOSS project. On the technical side a website
+requires a webserver and that’s something we don’t want to have.</p>
+<ul>
+<li>Remove CoordinationFeeRate &amp; Plebs</li>
 </ul>
 <h1 id="whats-next">What’s next</h1>
 <ul>
-<li><p>Remove histogram</p></li>
-<li><p>Remove CrashReport</p></li>
-<li><p>Implement p2p and remove alices/bobs identities</p></li>
-<li><p>Remove CoordinationFeeRate &amp; Plebs</p></li>
-<li><p>Extract IndexBuilder</p></li>
-<li><p>Create RPC (protobuf)</p></li>
-<li><p>Extract Fee Rate providers</p></li>
-<li><p>Remove Synchronizer</p></li>
-<li><p>Compact filter provider</p></li>
-<li><p>Review HandleGzipCompression</p></li>
-<li><p>Remoe RuntimeParams</p></li>
-<li><p>LateResponse delete</p></li>
-<li><p>open logs menus. remove</p></li>
-<li><p>Dust threshold only for already used addresses</p></li>
-<li><p>Remove dust threshold?</p></li>
-<li><p>Ban offending coordinators</p></li>
-<li><p>Separate UiConfig again</p></li>
-<li><p>Task</p></li>
-<li><p>Improve amount organization</p></li>
-<li><p>Configure CI</p></li>
-<li><p>Reduce RangeProofs by shift it right</p></li>
-<li><p>Password protected wallet</p></li>
-<li><p>Create wcli</p></li>
-<li><p>Replace MultiWallet by Multi account</p></li>
-<li><p>Add coordinator dropbox</p></li>
-<li><p>Backup mechanism</p></li>
-<li><p>Add database</p></li>
-<li><p>Use SigNet instead of TestNet</p></li>
-<li><p>Protocol constants by name</p></li>
-<li><p>CoinJoinClient process as continuation</p></li>
-<li><p>Make the Std, RangeProofs a function of liquidity</p></li>
+<li>Remove histogram</li>
 </ul>
-<p><a href="wasabito_kvac_unification">Unify credentials</a></p>
+<p>It is really hard to improve the Bitcoin Core’s fee estimation
+algorithm and the usage of the histogram didn’t improve the estimation
+at all, in fact the need for additional RPC requests makes the system
+less reliable. This is a cost only feature with zero benefits.</p>
+<ul>
+<li>Remove CrashReport</li>
+</ul>
+<p>The only thing users hate more than a crash is a crash followed by a
+crash report.</p>
+<ul>
+<li>Implement p2p and remove alices/bobs identities</li>
+<li>Extract IndexBuilder</li>
+<li>Create RPC (protobuf)</li>
+<li>Extract Fee Rate providers</li>
+<li>Remove Synchronizer</li>
+<li>Compact filter provider</li>
+<li>Review HandleGzipCompression</li>
+<li>Remoe RuntimeParams</li>
+<li>LateResponse delete</li>
+<li>open logs menus. remove</li>
+<li>Dust threshold only for already used addresses</li>
+<li>Remove dust threshold?</li>
+<li>Ban offending coordinators</li>
+<li>Separate UiConfig again</li>
+<li>Task</li>
+<li>Improve amount organization</li>
+<li>Configure CI</li>
+<li>Password protected wallet</li>
+<li>Create wcli</li>
+<li>Replace MultiWallet by Multi account</li>
+<li>Add coordinator dropbox</li>
+<li>Backup mechanism</li>
+<li>Add database</li>
+<li>Use SigNet instead of TestNet</li>
+<li>Protocol constants by name</li>
+<li>CoinJoinClient process as continuation</li>
+<li>Make the Std, RangeProofs a function of liquidity</li>
+</ul>
+<p><em><a href="wasabito_kvac_unification.html">Unify credentials</a>
+</em><a href="wasabito_dependency_graph.html">Dependency graph
+optimization</a></p>
 </article>
 <script>hljs.highlightAll();</script>
 </body>

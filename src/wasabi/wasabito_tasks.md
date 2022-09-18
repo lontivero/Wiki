@@ -172,7 +172,7 @@ source of all the rates) make people to loss lots of money.
   - see: [Bug on Kraken Let Users Buy Bitcoin at Levels Below Market Price](https://es.cointelegraph.com/news/bug-on-kraken-let-users-buy-bitcoin-2k-cheaper-and-sell-2k-higher)
   - see: just _google it_, there are many of these cases
   
-::::: Alert ::::::::::::::::::
+::::: Warning ::::::::::::::::::
 If you provide these rates to your users and they lose money then **you** will be culprit!
 ::::::::::::::::::::::::::::::
 
@@ -211,14 +211,27 @@ This commit moves the code useful for testing to the testing
 project and removes the rest.
 
 * Remove website
-* Change GPG public key
+
+Having a website for one specific company as part of the project makes no sense for an FOSS project.
+On the technical side a website requires a webserver and that's something we don't want to have.
+
+* Remove CoordinationFeeRate & Plebs
+
+
 
 # What's next  
+
 * Remove histogram
+
+It is really hard to improve the Bitcoin Core's fee estimation algorithm and the usage of the
+histogram didn't improve the estimation at all, in fact the need for additional RPC requests
+makes the system less reliable. This is a cost only feature with zero benefits.
+
 * Remove CrashReport
 
+The only thing users hate more than a crash is a crash followed by a crash report.
+
 * Implement p2p and remove alices/bobs identities
-* Remove CoordinationFeeRate & Plebs
 * Extract IndexBuilder
 * Create RPC (protobuf)
 * Extract Fee Rate providers
@@ -235,7 +248,6 @@ project and removes the rest.
 * Task
 * Improve amount organization
 * Configure CI
-* Reduce RangeProofs by shift it right
 * Password protected wallet
 * Create wcli
 * Replace MultiWallet by Multi account
@@ -247,5 +259,6 @@ project and removes the rest.
 * CoinJoinClient process as continuation
 * Make the Std, RangeProofs a function of liquidity
 
-[Unify credentials](wasabito_kvac_unification)
+* [Unify credentials](wasabito_kvac_unification)
+* [Dependency graph optimization](wasabito_dependency_graph)
 

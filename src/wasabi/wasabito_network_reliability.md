@@ -5,7 +5,7 @@ summary: |
     Here I propose a mechanism for simplifying the communication of the clients with the centralized coordinator
     and set the initial step to remove the centrilized coordinator one day.
 
-    You can  [read more about wasabito](wasabito):
+    You can  [read more about wasabito](wasabito_vision):
 ...
 
 
@@ -13,7 +13,7 @@ summary: |
 
 [Wasabi Wallet](http://github.com/zkSNACKs/WalletWasabi) guaratees the central coordinator cannot learn the input-to-input, output-to-output nor input-to-output links.
 That is achieved by using different Tor circuits for different identities. I mean, if your wallet selects two coins for
-participating in a coinjoin, each of those coins are registered by sending the input registration request through two
+participating in a coinjoin, each of those coins are registered by sending the input registration requests through two
 completely isolated Tor circuits. The same is true for all other requests.
 
 # The "problem"
@@ -40,8 +40,25 @@ they are linked or not.
 Given my wallet registers other people's inputs/outputs/signatures then others have to register my inputs/outputs/signature,
 what means that wallets needs to speak one each other. Moreover, wallets should send the same request to more than one peer.
 
+```{.dot render="dot -Tsvg -o %o.svg %i"
+         img="../../src/images/wasabito_p2p_graph"
+         out="/home/lontivero/Documents/Wiki/src/images" }
 
-![](../../src/images/p2p.png)
+digraph G {
+	fontname="Helvetica,Arial,sans-serif"
+	node [fontname="Helvetica,Arial,sans-serif"]
+	edge [dir=both]
+
+	"Wallet 1" -> "Wallet 2";
+	"Wallet 1" -> Coordinator;
+	"Wallet 2" -> Coordinator;
+	"Wallet 3" -> Coordinator;
+	"Wallet 3" -> "Wallet 4";
+	"Wallet 3" -> "Wallet 2";
+	"Wallet 4" -> "Wallet 2";
+	Coordinator;
+}
+```
 
 We can say that we have the exact same problem that before because the communication with our peers has to be also 
 annonymous and that requires Tor circuits, one for each request so my peer cannot link my requests, right? well, no because
@@ -87,9 +104,12 @@ enough requests from others in order to make as less request to the coordinator 
 Tor circuits are the communication isolation mechanims so, if the clients don't need to isolate identities then circuits are
 no mandatory and, following the same reasoning, if Tor circuits are not necessary anymore then Tor is not the only alternative.
 
+See:  [Network anonymization agnostic](wasabito_network_agnostic)
+
+
 # Preliminar conclusion
 
-A peer-to-peer network, as mentioned in the  [wasabito vision document](wasabito) is not only critical for P2EP and 
+A peer-to-peer network, as mentioned in the  [wasabito vision document](wasabito_vision) is not only critical for P2EP and 
 for payjoins in coinjoins, unlinkeable payments and similar schemes but also for removing one of the greater source of
 unreliability: the Tor circuit management to guarantee identities isolation and request scheduling for preventing
 network timing analysis.

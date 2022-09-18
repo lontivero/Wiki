@@ -1,0 +1,30 @@
+source: 41603782fce1d2996d6dcd8c2a78e44225f3dc3d
+render: dot -Tsvg -o %o.svg %i
+img: ../../src/images/wasabito_dependency_graph_alternative
+out: /home/lontivero/Documents/Wiki/src/images/wasabito_dependency_graph_alternative
+
+digraph G {
+    subgraph cluster_inputs {
+  0 [label="7s 0b"];
+  1 [label="3s 0b"];
+    }
+    subgraph cluster_outputs {
+  2 [label="-3s 0b"];
+  3 [label="-3s 0b"];
+  4 [label="-2s 0b"];
+  5 [label="-1s 0b"];
+  6 [label="-1s 0b"];
+    }
+    subgraph cluster_reissuance {
+  7 [label=""];
+    }
+  {
+    edge [color=blue, fontcolor=blue];
+    0 -> 7 [label="6s"];
+    0 -> 5 [label="1s"];
+    7 -> 2 [label="3s"];
+    7 -> 3 [label="3s"];
+    1 -> 4 [label="2s"];
+    1 -> 6 [label="1s"];
+  }
+}

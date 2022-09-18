@@ -1,0 +1,23 @@
+source: 21cbb4843e6f9786a87f287ff154b39849c29be1
+render: dot -Tsvg -o %o.svg %i
+img: ../../src/images/wasabito_p2p_network
+out: /home/lontivero/Documents/Wiki/src/images/wasabito_p2p_network
+
+
+digraph G {
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif"]
+    edge [dir=both]
+
+    a1 -> a2;
+    a1 -> a3;
+    a1 -> a4;
+    a1 -> coordinator;
+    a2 -> a4;
+    a2 -> coordinator;
+    a3 -> coordinator;
+    a3 -> a4;
+    a3 -> a2;
+    a4 -> coordinator;
+    coordinator;
+}

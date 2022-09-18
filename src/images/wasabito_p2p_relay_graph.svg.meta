@@ -1,0 +1,18 @@
+source: dca00c06ef9cd1f157bbf17408b35b1c1c608df6
+render: dot -Tsvg -o %o.svg %i
+img: ../../src/images/wasabito_p2p_relay_graph
+out: /home/lontivero/Documents/Wiki/src/images/wasabito_p2p_relay_graph
+
+
+digraph G {
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif"]
+    edge [dir=both]
+
+    "Wallet 1" -> "Coordinator" [style=dashed; label="satoshi"];
+    "Wallet 1" -> "Wallet 2";
+    "Wallet 1" -> "Wallet 3";
+    "Wallet 2" -> "Wallet 3";
+    "Wallet 2" -> Coordinator;
+    "Wallet 3" -> Coordinator;
+}
