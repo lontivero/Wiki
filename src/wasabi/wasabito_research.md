@@ -14,5 +14,5 @@ This pages kees a log of the ideas I would like to work in in order to:
 
 - Rethink the  [convenience of having two types of credentials](wasabito_kvac_unification) in comparison with having only one with two different attributes
 
-
+- Anaylize the strategy to  [improve the compact filters](wasabito_compact_filters)
 
