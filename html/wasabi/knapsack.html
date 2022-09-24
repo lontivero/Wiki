@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+           "GitHub HTML5 Pandoc Template" v2.2 — by Tristano Ajmone
+==============================================================================
+Copyright © Tristano Ajmone, 2017-2020, MIT License (MIT). Project's home:
+
+- https://github.com/tajmone/pandoc-goodies
+
+The CSS in this template reuses source code taken from the following projects:
+
+- GitHub Markdown CSS: Copyright © Sindre Sorhus, MIT License (MIT):
+  https://github.com/sindresorhus/github-markdown-css
+
+- Primer CSS: Copyright © 2016-2017 GitHub Inc., MIT License (MIT):
+  http://primercss.io/
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The MIT License
+
+Copyright (c) Tristano Ajmone, 2017-2020 (github.com/tajmone/pandoc-goodies)
+Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+Copyright (c) 2017 GitHub Inc.
+
+"GitHub Pandoc HTML5 Template" is Copyright (c) Tristano Ajmone, 2017-2020,
+released under the MIT License (MIT); it contains readaptations of substantial
+portions of the following third party softwares:
+
+(1) "GitHub Markdown CSS", Copyright (c) Sindre Sorhus, MIT License (MIT).
+(2) "Primer CSS", Copyright (c) 2016 GitHub Inc., MIT License (MIT).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+==============================================================================-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CoinJoin Anonymity Analysis</title>
+  <style type="text/css">
+@charset "UTF-8";.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;color:#24292e;font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:16px;line-height:1.5;word-wrap:break-word;box-sizing:border-box;min-width:200px;max-width:980px;margin:0 auto;padding:45px}.markdown-body a{color:#0366d6;background-color:transparent;text-decoration:none;-webkit-text-decoration-skip:objects}.markdown-body a:active,.markdown-body a:hover{outline-width:0}.markdown-body a:hover{text-decoration:underline}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body strong{font-weight:600}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.markdown-body h1{font-size:2em;margin:.67em 0;padding-bottom:.3em;border-bottom:1px solid #eaecef}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid #eaecef}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#6a737d}.markdown-body img{border-style:none}.markdown-body svg:not(:root){overflow:hidden}.markdown-body hr{box-sizing:content-box;height:.25em;margin:24px 0;padding:0;overflow:hidden;background-color:#e1e4e8;border:0}.markdown-body hr::before{display:table;content:""}.markdown-body hr::after{display:table;clear:both;content:""}.markdown-body input{margin:0;overflow:visible;font:inherit;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=checkbox]{box-sizing:border-box;padding:0}.markdown-body *{box-sizing:border-box}.markdown-body blockquote{margin:0}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dd{margin-left:0}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:600}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body code{font-family:SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace}.markdown-body pre{font:12px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;word-wrap:normal}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote{padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}.markdown-body table th{font-weight:600}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #dfe2e5}.markdown-body table tr{background-color:#fff;border-top:1px solid #c6cbd1}.markdown-body table tr:nth-child(2n){background-color:#f6f8fa}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body code{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(27,31,35,.05);border-radius:3px}.markdown-body code::after,.markdown-body code::before{letter-spacing:-.2em;content:" "}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f6f8fa;border-radius:3px}.markdown-body pre code{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code::after,.markdown-body pre code::before{content:normal}.markdown-body .full-commit .btn-outline:not(:disabled):hover{color:#005cc5;border-color:#005cc5}.markdown-body kbd{box-shadow:inset 0 -1px 0 #959da5;display:inline-block;padding:3px 5px;font:11px/10px SFMono-Regular,Consolas,"Liberation Mono",Menlo,Courier,monospace;color:#444d56;vertical-align:middle;background-color:#fcfcfc;border:1px solid #c6cbd1;border-bottom-color:#959da5;border-radius:3px;box-shadow:inset 0 -1px 0 #959da5}.markdown-body :checked+.radio-label{position:relative;z-index:1;border-color:#0366d6}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:3px}.markdown-body .task-list-item input{margin:0 .2em .25em -1.6em;vertical-align:middle}.markdown-body::before{display:table;content:""}.markdown-body::after{display:table;clear:both;content:""}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.Alert,.Error,.Note,.Success,.Warning{padding:11px;margin-bottom:24px;border-style:solid;border-width:1px;border-radius:4px}.Alert p,.Error p,.Note p,.Success p,.Warning p{margin-top:0}.Alert p:last-child,.Error p:last-child,.Note p:last-child,.Success p:last-child,.Warning p:last-child{margin-bottom:0}.Alert{color:#246;background-color:#e2eef9;border-color:#bac6d3}.Warning{color:#4c4a42;background-color:#fff9ea;border-color:#dfd8c2}.Error{color:#911;background-color:#fcdede;border-color:#d2b2b2}.Success{color:#22662c;background-color:#e2f9e5;border-color:#bad3be}.Note{color:#2f363d;background-color:#f6f8fa;border-color:#d5d8da}.Alert h1,.Alert h2,.Alert h3,.Alert h4,.Alert h5,.Alert h6{color:#246;margin-bottom:0}.Warning h1,.Warning h2,.Warning h3,.Warning h4,.Warning h5,.Warning h6{color:#4c4a42;margin-bottom:0}.Error h1,.Error h2,.Error h3,.Error h4,.Error h5,.Error h6{color:#911;margin-bottom:0}.Success h1,.Success h2,.Success h3,.Success h4,.Success h5,.Success h6{color:#22662c;margin-bottom:0}.Note h1,.Note h2,.Note h3,.Note h4,.Note h5,.Note h6{color:#2f363d;margin-bottom:0}.Alert h1:first-child,.Alert h2:first-child,.Alert h3:first-child,.Alert h4:first-child,.Alert h5:first-child,.Alert h6:first-child,.Error h1:first-child,.Error h2:first-child,.Error h3:first-child,.Error h4:first-child,.Error h5:first-child,.Error h6:first-child,.Note h1:first-child,.Note h2:first-child,.Note h3:first-child,.Note h4:first-child,.Note h5:first-child,.Note h6:first-child,.Success h1:first-child,.Success h2:first-child,.Success h3:first-child,.Success h4:first-child,.Success h5:first-child,.Success h6:first-child,.Warning h1:first-child,.Warning h2:first-child,.Warning h3:first-child,.Warning h4:first-child,.Warning h5:first-child,.Warning h6:first-child{margin-top:0}h1.title,p.subtitle{text-align:center}h1.title.followed-by-subtitle{margin-bottom:0}p.subtitle{font-size:1.5em;font-weight:600;line-height:1.25;margin-top:0;margin-bottom:16px;padding-bottom:.3em}div.line-block{white-space:pre-line}
+  </style>
+  <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="highlight/styles/default.min.css">
+  <link rel="stylesheet" href="none.css">
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+  type="text/javascript"></script>
+    <script src="highlight/highlight.min.js"></script>
+</head>
+<body>
+<article class="markdown-body">
+<a href="index.html">Wiki Home</a>
+<header>
+<h1 class="title followed-by-subtitle">CoinJoin Anonymity Analysis</h1>
+<p class="subtitle">Introduction to the concepts multiparty transactions
+for anonymity</p>
+</header>
+<hr>
+<nav id="TOC">
+<h1 class="toc-title">Contents</h1>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#mixing">Mixing</a></li>
+<li><a href="#analysis">Analysis</a>
+<ul>
+<li><a href="#unjoining-coinjoined-transactions">Unjoining coinjoined
+transactions</a></li>
+<li><a href="#linkeage">Linkeage</a></li>
+<li><a href="#math-of-combinations">Math of combinations</a></li>
+<li><a href="#equal-output-coinjoin-comparison">Equal-output coinjoin
+comparison</a></li>
+<li><a href="#complex-example">Complex example</a></li>
+</ul></li>
+</ul>
+</nav>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>CoinJoin is a technique for combining multiple Bitcoin transactions
+into a single one to make it more difficult for blockchain analyzers to
+determine which the original transactions are.<br />
+<br />
+In this document we want to keep a record of our attempts to create a
+general approach for analyzing the pros and cons of the different mixing
+algorithms.</p>
+<h1 id="mixing">Mixing</h1>
+<p>Let’s say we have these two transactions:</p>
+<div class="center">
+<table style="border:0px solid transparent;">
+<tr>
+<th>
+Transaction #1
+</th>
+<th>
+Transaction #2
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+25\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+49\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+31\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+7\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+18\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+21\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+13\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+10\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<p>They can be combined in one transaction as follow:</p>
+<div class="center">
+<table>
+<tr>
+<th>
+Combined Transaction
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+25\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+49\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+31\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+7\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+18\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+21\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+13\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+10\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+Figure 1
+</td>
+</tr>
+</table>
+</div>
+<h1 id="analysis">Analysis</h1>
+<p>We are going to focus specifically on blockchain analysis where the
+analysts goal is attach identities to coins (outputs) and tracking them
+using two well-known heuristics:</p>
+<ul>
+<li><p>H1: All inputs to a transaction are owned by the same
+entity</p></li>
+<li><p>H2: The one-time change address is controlled by the same entity
+as the input addresses</p></li>
+</ul>
+<p>These heuristics cannot be applied to CoinJoin transactions but only
+to single payment transactions instead. For that reason the analysts
+have to unjoin the coinjoined transactions with the hope of finding the
+original payment transactions to apply the heuristics
+individually.<br />
+Side note: H1 is clearly a more robust assumption than H2.</p>
+<h2 id="unjoining-coinjoined-transactions">Unjoining coinjoined
+transactions</h2>
+<p>Let’s take the coinjoin transaction in figure 1. That transaction can
+be interpreted in many different ways but, <em>just for simplicity</em>,
+lets assume that we know this is a coinjoin transaction between two
+participants (this is not obvious) and that each transaction has no more
+than two outputs. This is enough for extracting the original
+transactions by grouping the outputs, the inputs and then match the sum
+of both sets:<br />
+</p>
+<p>Outputs:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: center;">OutputSet</th>
+<th style="text-align: right;">Sum(OSet)</th>
+<th></th>
+<th style="text-align: right;">#</th>
+<th style="text-align: center;">OutputSet</th>
+<th style="text-align: right;">Sum(OSet)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: center;">{49}</td>
+<td style="text-align: right;">49</td>
+<td></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: center;">{49, 21}</td>
+<td style="text-align: right;">70</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: center;">{7}</td>
+<td style="text-align: right;">7</td>
+<td></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: center;">{49, 10}</td>
+<td style="text-align: right;">59</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: center;">{21}</td>
+<td style="text-align: right;">21</td>
+<td></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: center;">{7, 21}</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: center;">{10}</td>
+<td style="text-align: right;">10</td>
+<td></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: center;">{7, 10}</td>
+<td style="text-align: right;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: center;">{49, 7}</td>
+<td style="text-align: right;"><strong>56</strong></td>
+<td></td>
+<td style="text-align: right;">9</td>
+<td style="text-align: center;">{21, 10}</td>
+<td style="text-align: right;"><strong>31</strong></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+<br />
+Inputs:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: center;">InputSet</th>
+<th style="text-align: right;">Sum(ISet)</th>
+<th></th>
+<th style="text-align: right;">#</th>
+<th style="text-align: center;">InputSet</th>
+<th style="text-align: right;">Sum(ISet)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: center;">{25}</td>
+<td style="text-align: right;">25</td>
+<td></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: center;">{31, 18}</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: center;">{31}</td>
+<td style="text-align: right;"><strong>31</strong></td>
+<td></td>
+<td style="text-align: right;">8</td>
+<td style="text-align: center;">{31, 13}</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: center;">{18}</td>
+<td style="text-align: right;">18</td>
+<td></td>
+<td style="text-align: right;">9</td>
+<td style="text-align: center;">{18, 13}</td>
+<td style="text-align: right;"><strong>31</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: center;">{13}</td>
+<td style="text-align: right;">13</td>
+<td></td>
+<td style="text-align: right;">10</td>
+<td style="text-align: center;">{25, 31, 18}</td>
+<td style="text-align: right;">74</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: center;">{25, 31}</td>
+<td style="text-align: right;"><strong>56</strong></td>
+<td></td>
+<td style="text-align: right;">11</td>
+<td style="text-align: center;">{25, 31, 13}</td>
+<td style="text-align: right;">69</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: center;">{25, 18}</td>
+<td style="text-align: right;">43</td>
+<td></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: center;">{25, 18, 13}</td>
+<td style="text-align: right;"><strong>56</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: center;">{25, 13}</td>
+<td style="text-align: right;">38</td>
+<td></td>
+<td style="text-align: right;">13</td>
+<td style="text-align: center;">{31, 18, 13}</td>
+<td style="text-align: right;">62</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+<br />
+Before continuing with the example, it worth to note that given the
+coinjoin transaction has 4 inputs and that we know there are two
+sub-transaction then, the maximum number of inputs a sub-transaction can
+have is 3. These 3 inputs can be combined in 14 different ways. The
+number of ways a set with of <span class="math inline">\(n\)</span>
+elements can be partitioned into disjoint subsets is called ‘Bell
+number’ and it grows rapidly as the value of <span
+class="math inline">\(n\)</span> increases.<br />
+Having built this table it is possible now to extract all the possible
+transactions. In this case we have 4 sub-transactions (#1, #2, #3 and
+#4)</p>
+<div class="center">
+<table>
+<tr>
+<th colspan="2">
+Valid Transactions Set #1
+</th>
+</tr>
+<tr>
+<th>
+Transaction #1
+</th>
+<th>
+Transaction #2
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+25\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+49\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+31\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+7\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+18\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+21\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+13\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+10\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<th colspan="2">
+Valid Transactions Set #2
+</th>
+</tr>
+<tr>
+<th>
+Transaction #3
+</th>
+<th>
+Transaction #4
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+25\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+49\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+18\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+7\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+13\)</span></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+31\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+21\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+10\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<p>Also, we can see that if well all of these look perfectly valid,
+there are only two valid sets of transactions that could result in the
+original coinjoined transaction and in the image above we had wrapped
+them together in the <em>Valid Transactions Set</em> tables. They
+are</p>
+<ul>
+<li><p>Transaction #1 and Transaction #2</p></li>
+<li><p>Transaction #3 and Transaction #4</p></li>
+</ul>
+<p>Clearly, other combinations are invalid because same inputs appears
+in more than one sub-transaction.<br />
+It is important to note that in this really simple example an analyzer
+has only 0.5 probability of choosing the right original sub-transactions
+set. In practice this does not use to happen but the good part is that
+we can make it happen simply by choosing the outputs values (that’s what
+knapsack<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a> and traditional coinjoins do).<br />
+Finally, it worth to have in mind that if well for the sake of
+simplicity we said that we already knew the transaction had two
+participants, this information is not available in advance in a
+real-world transaction. The only thing we know is that given the
+transaction has four inputs, there are at least one participant and at
+most four.</p>
+<h2 id="linkeage">Linkeage</h2>
+<p>However the analysis effectiveness can be greatly improved, at the
+point to completely solve the puzzle, by adding more information to the
+process. By observing the sets of valid transactions we can see that
+outputs <span class="math inline">\(\{o=49, o=7\}\)</span> and <span
+class="math inline">\(\{o=21, o=10\}\)</span> are always together, that
+is known as the <code>output-to-output</code> link and means that both
+are part of the same sub transaction.</p>
+<p>In the same way it is evident that the set <span
+class="math inline">\(\{\{i=25\}, \{o=49, o=7\}\}\)</span> is always
+present, what is known as <code>input-to-output</code> link and tells us
+that those are part of the same sub transaction too.</p>
+<p>Finally, there exists the <code>input-to-input</code> links that
+reveal two or more inputs belong to the same sub transaction.
+Unfortunatelly there is none in the previous example.</p>
+<h2 id="math-of-combinations">Math of combinations</h2>
+<p>Given <em>n</em> inputs, the number of all possible subsets of at
+most <em>k</em> elements is <span
+class="math display">\[\sum_{1&lt;k&lt;n}\binom{n}{k} =
+\sum_{1&lt;k&lt;n}\frac{n!}{k!\left (n - k \right )!}\]</span> This can
+be rapidly calculated by using Pascal Triangle and summing the elements
+of <em>nth</em> row from index 1 to k. For example, in our example we
+have 4 inputs and we analyzed 14 subsets of at most 3 elements, we can
+verify that 4 + 6 + 4.<br />
+</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span
+class="math inline">\(n=0\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: center;">1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: center;">1</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span
+class="math inline">\(n=1\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td style="text-align: center;"></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: center;">2</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span
+class="math inline">\(n=2\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td style="text-align: center;">2</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: center;">4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span
+class="math inline">\(n=3\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>3</td>
+<td style="text-align: center;"></td>
+<td>3</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: center;">8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span
+class="math inline">\(n=4\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td><strong>4</strong></td>
+<td></td>
+<td style="text-align: center;"><strong>6</strong></td>
+<td></td>
+<td><strong>4</strong></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td style="text-align: center;">16</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span
+class="math inline">\(n=5\)</span></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>5</td>
+<td></td>
+<td>10</td>
+<td style="text-align: center;"></td>
+<td>10</td>
+<td></td>
+<td>5</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td></td>
+<td style="text-align: center;">32</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span
+class="math inline">\(n=6\)</span></td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>6</td>
+<td></td>
+<td>15</td>
+<td></td>
+<td style="text-align: center;">20</td>
+<td></td>
+<td>15</td>
+<td></td>
+<td>6</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td style="text-align: center;">64</td>
+<td></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span
+class="math inline">\(n=7\)</span></td>
+<td>1</td>
+<td></td>
+<td>7</td>
+<td></td>
+<td>21</td>
+<td></td>
+<td>35</td>
+<td style="text-align: center;"></td>
+<td>35</td>
+<td></td>
+<td>21</td>
+<td></td>
+<td>7</td>
+<td></td>
+<td>1</td>
+<td style="text-align: center;">128</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><br />
+In the same way, and using the same example, we can check that given the
+4 outputs (<span class="math inline">\(n\)</span>), the number of
+subsets of at most <span class="math inline">\(2 (k)\)</span> outputs
+can be calculated by summing the elements of the 4th row from index 1 to
+2, this is: 4 + 6.<br />
+Lets call <em>n</em> to the number of all possible subsets of inputs and
+<em>m</em> to the number of all possible subsets of outputs, the number
+of comparison to perform is <span class="math inline">\(n*m\)</span>. A
+more simple formula that will be useful is <span
+class="math inline">\(2^{n+m}\)</span></p>
+<h2 id="equal-output-coinjoin-comparison">Equal-output coinjoin
+comparison</h2>
+<p>Lets say two people want to coinjoin together to obtain coins of the
+exact same value (for this example lets say 10). Both provide their
+transactions:</p>
+<div class="center">
+<table style="border:0px solid transparent;">
+<tr>
+<th>
+Transaction #1
+</th>
+<th>
+Transaction #2
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+9\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+7\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o =
+10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+5\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+1\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<p>After join them, they get the following:</p>
+<div class="center">
+<table>
+<tr>
+<th>
+CoinJoin Transaction
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_1 =
+10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+9\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_2 =
+10\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+7\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+5\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+1\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<p>This coinjoin transaction can be analyzed in the exact same way that
+we did before but in this case we don’t need any of the previous
+assumptions because, unlike the naive coinjoin transaction we used
+initially, this transaction has a clear pattern and it is easy to know
+the number of participants involved simply by counting the number of
+indistinguishable outputs. Also, the change outputs are clearly
+identifiable. Finally, extracting the possible sub-transactions is
+trivial and doesn’t require building big tables as before. Just take a
+change value, add it 10 and look what inputs sum gives us that
+result.</p>
+<div class="center">
+<table>
+<tr>
+<th colspan="2">
+Valid Transactions Set #1
+</th>
+</tr>
+<tr>
+<th>
+Transaction #1
+</th>
+<th>
+Transaction #2
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+9\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_1 =
+10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+7\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_2 =
+10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+5\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+1\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<th colspan="2">
+Valid Transactions Set #2
+</th>
+</tr>
+<tr>
+<th>
+Transaction #3
+</th>
+<th>
+Transaction #4
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+9\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_2 =
+10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+8\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+7\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(i =
+6\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_2 =
+10\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(i =
+5\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(o_c =
+1\)</span></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<p>We can see in this example that the equal-outputs coinjoin
+transaction provides 0.5 probability to track the "anonymized" coin.</p>
+<h2 id="complex-example">Complex example</h2>
+<p>Lets see the transaction <em>X</em> below and see what can we learn
+from it. At first glance it consists of <em>six</em> inputs and
+<em>eight</em> where 5.39986 units in and the same units out (no fees
+were paid). Assuming no addresses are reused and same script types,
+there is nothing else we can conclude.</p>
+<div class="center">
+<table>
+<tr>
+<th>
+CoinJoin Transaction
+</th>
+</tr>
+<tr>
+<td>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Inputs</th>
+<th style="text-align: right;">Outputs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">i = 1.88841</td>
+<td style="text-align: right;">o = 1.89031</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">i = 1.79381</td>
+<td style="text-align: right;">o = 1.81421</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">i = 0.95031</td>
+<td style="text-align: right;">o = 0.92801</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">i = 1.52261</td>
+<td style="text-align: right;">o = 0.66050</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">i = 1.39181</td>
+<td style="text-align: right;">o = 0.96651</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">i = 1.21961</td>
+<td style="text-align: right;">o = 1.11521</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">i = 0.68991</td>
+<td style="text-align: right;">o = 1.81781</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"></td>
+<td style="text-align: right;">o = 0.26391</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<p>It is not obvious if it is a coinjoin transaction or a pay to many
+batch transaction. Assuming it is a coinjoin, we know there are no more
+than <em>seven</em> participants so, lets analyze the number of subsets
+we can split it using the formula used above and calling the number of
+inputs <span class="math inline">\(n\)</span> and the number of outputs
+<span class="math inline">\(m\)</span>:</p>
+<p><span class="math display">\[\sum_{1&lt;k_i&lt;n}\binom{n}{k_i} *
+\sum_{1&lt;k_o&lt;m}\binom{m}{k_o} = 126 * 254 = 32,004\]</span></p>
+<p>The partitions analysis found 45 valid sub transactions<a href="#fn2"
+class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.
+Moreover, another interesting result is the number of participation of
+each input/output in those extracted transactions:<br />
+</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Input</th>
+<th style="text-align: center;">participation</th>
+<th></th>
+<th style="text-align: right;">Output</th>
+<th style="text-align: center;">participation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.52261</td>
+<td style="text-align: center;">31</td>
+<td></td>
+<td style="text-align: right;">1.89031</td>
+<td style="text-align: center;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.21961</td>
+<td style="text-align: center;">31</td>
+<td></td>
+<td style="text-align: right;">1.81421</td>
+<td style="text-align: center;">33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.39181</td>
+<td style="text-align: center;">33</td>
+<td></td>
+<td style="text-align: right;">0.92801</td>
+<td style="text-align: center;">33</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.68991</td>
+<td style="text-align: center;">33</td>
+<td></td>
+<td style="text-align: right;">0.66050</td>
+<td style="text-align: center;">29</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.88841</td>
+<td style="text-align: center;">31</td>
+<td></td>
+<td style="text-align: right;">0.96651</td>
+<td style="text-align: center;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.79381</td>
+<td style="text-align: center;">31</td>
+<td></td>
+<td style="text-align: right;">1.11521</td>
+<td style="text-align: center;">31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.95031</td>
+<td style="text-align: center;">31</td>
+<td></td>
+<td style="text-align: right;">1.81781</td>
+<td style="text-align: center;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"></td>
+<td style="text-align: center;"></td>
+<td></td>
+<td style="text-align: right;">0.26391</td>
+<td style="text-align: center;">31</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+<br />
+Even when there is no much that we can conclude from this, intuitively
+we can say that this level of ambiguity is highly unusual. After all,
+what are the chances that almost every input and every output
+participate in <span class="math inline">\(70\%\)</span> of the 45
+sub-transactions? In fact, the existence of such a number of
+transactions is also unusual (intuitively again).<br />
+</p>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"
+role="doc-endnote"><p>https://www.comsys.rwth-aachen.de/fileadmin/papers/2017/2017-maurer-trustcom-coinjoin.pdf<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"
+role="doc-endnote"><p>https://github.com/lontivero/Knapsack/blob/master/data/knapsack-3-participants-demo.txt<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</article>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
