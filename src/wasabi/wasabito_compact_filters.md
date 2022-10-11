@@ -3,14 +3,6 @@ title: Compact filters
 toc: false
 ---
 
-```{render="{{gnuplot}}"
-     img="../../src/images/panda_gnuplot_example"
-     out="/home/lontivero/Documents/Wiki/src/images" }
-set xrange [-pi:pi]
-set yrange [-1.5:1.5]
-plot sin(x) lw 4, cos(x) lw 4
-```
-
 
 Analizing 270013 filters....
 

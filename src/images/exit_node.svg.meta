@@ -1,6 +1,6 @@
 source: 09174716ed59179654e5232ab8448cc9d2137609
 render: dot -Tsvg -o %o.svg %i
-img: /home/lontivero/Documents/Wiki/src/images/exit_node
+img: ../src/images/exit_node
 out: /home/lontivero/Documents/Wiki/src/images/exit_node
 
 digraph G {

@@ -431,7 +431,7 @@ $ ./torcontrol getinfo circuit-status
 ```
 
 ```{.dot render="dot -Tsvg -o %o.svg %i"
-         img="{{SOURCE_DIRECTORY}}/src/images/exit_node"
+         img="../src/images/exit_node"
          out="{{SOURCE_DIRECTORY}}/src/images" }
 digraph G {
     fontname="Helvetica,Arial,sans-serif"
