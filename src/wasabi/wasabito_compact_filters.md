@@ -3,13 +3,19 @@ title: Compact filters
 toc: false
 ---
 
+```{render="{{gnuplot}}"
+     img="../../src/images/panda_gnuplot_example"
+     out="/home/lontivero/Documents/Wiki/src/images" }
+set xrange [-pi:pi]
+set yrange [-1.5:1.5]
+plot sin(x) lw 4, cos(x) lw 4
+```
+
 
 Analizing 270013 filters....
 
-```{.fsx icmd="fsx" }
-open System
-let filters = 270013.0
-let data = [
+```meta
+data = [[
   100 , 21  
   200 , 56 
   300 , 75 
@@ -43,10 +49,26 @@ let data = [
   3100, 800 
   3200, 864 
   3300, 822 
-  3400, 868 ]
+  3400, 868 ]]
+```
 
+```{.fsx icmd="dotnet fsi --exec %s.fsx" }
+open System
+let filters = 270013.0
+let data = [
+{{data}}
+]
 Console.WriteLine("| Wallet Size | False Positives | Saving  | Aprox. Download |")
 Console.WriteLine("|-------------|-----------------|---------|-----------------|")
 for wz, fp in data do
   Console.WriteLine($"| {wz} | {fp} | {1.0 - (float(fp) / filters)} | {float(fp) * 1.7 / 1000.0} GB |")
 ```
+
+
+{.fsx icmd="dotnet fsi --exec %s.fsx" }
+open System
+let filters = 270013.0
+let data = [
+{data}
+]
+

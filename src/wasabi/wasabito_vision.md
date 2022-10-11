@@ -76,7 +76,7 @@ In other words, the only component in the coordinator should be the one that coo
 
 # Technological update
 
-Wasabi should support taproot scripts. This is something that many could need to implement solutions involving 
+Wasabi should [support taproot](support_taproot) scripts. This is something that many could need to implement solutions involving 
 complex scripts. 
 
 Wasabi should support wallet descriptors for interoperability and it is something that would be necessary to go from

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+COMMAND="${*}"
+
+printf "Initialized REPL for '%s'\n" "$COMMAND"
+printf "%s> " "$COMMAND"
+
+read -r INPUT
+
+while [ "$INPUT" != "" ];
+do
+    eval "$COMMAND $INPUT"
+    printf "%s> " "$COMMAND"
+    read -r INPUT
+done

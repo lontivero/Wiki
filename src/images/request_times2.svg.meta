@@ -1,0 +1,8 @@
+source: 011d4265ca7dd8d99c2959c1d7a2ccd1b5a8ec62
+render: gnuplot -e 'set terminal svg' -e 'set output "%o.svg"' -c %i
+img: ../src/images/request_times2
+out: /home/lontivero/Documents/Wiki/src/images/request_times2
+
+set xrange [-pi:pi]
+set yrange [-1.5:1.5]
+plot sin(x) lw 4, cos(x) lw 4

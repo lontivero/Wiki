@@ -17,4 +17,4 @@ This pages kees a log of the ideas I would like to work in in order to:
 - Analyze the strategy to  [improve the compact filters](wasabito_compact_filters)
 
 - Analyze [coinjoin anonymity](knapsack)
- 
+

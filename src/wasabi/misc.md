@@ -76,3 +76,6 @@ namespace BinaryFilters
     }
 }
 ```
+
+[Tor reliability proposal](tor_reliability_proposal)
+

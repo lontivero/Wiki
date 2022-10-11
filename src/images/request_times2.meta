@@ -1,0 +1,9 @@
+source: 5a7f43a7c61e3ad9aed0f5e93294d6dcfbe485f2
+render: gnuplot
+img: /home/lontivero/Documents/Wiki/src/images/request_times2
+out: /home/lontivero/Documents/Wiki/src/images/request_times2
+
+      }
+set xrange [-pi:pi]
+set yrange [-1.5:1.5]
+plot sin(x) lw 4, cos(x) lw 4

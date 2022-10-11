@@ -1,0 +1,19 @@
+source: 09174716ed59179654e5232ab8448cc9d2137609
+render: dot -Tsvg -o %o.svg %i
+img: /home/lontivero/Documents/Wiki/src/images/exit_node
+out: /home/lontivero/Documents/Wiki/src/images/exit_node
+
+digraph G {
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif"]
+    rankdir="LR";
+
+setsun -> ForPrivacyNET
+antifaang -> mevPLicebeer10b
+VTITor4 -> Dingle
+PeachUnknown -> fastlane
+ForPrivacyNET -> onionDAOrel0aded1 
+mevPLicebeer10b -> onionDAOrel0aded1 
+fastlane -> onionDAOrel0aded1 
+Dingle -> onionDAOrel0aded1
+}

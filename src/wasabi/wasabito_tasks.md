@@ -261,4 +261,5 @@ The only thing users hate more than a crash is a crash followed by a crash repor
 
 * [Unify credentials](wasabito_kvac_unification)
 * [Dependency graph optimization](wasabito_dependency_graph)
+* [Support taproot](support_taproot)
 
