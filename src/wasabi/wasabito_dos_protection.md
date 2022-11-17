@@ -218,5 +218,43 @@ void OnBlockArrivedFromP2PNetwork(Block block)
 }
 ```
 
+# Replacing transactions as defensive mechanism
+
+It is not so rare to see in the logs that some successfully built coinjoin transaction failed to broadcast because a double spend, the message looks like this:
+
+```
+WARNING   Arena.StepTransactionSigningPhaseAsync Transaction broadcasting failed: 'NBitcoin.RPC.RPCException: insufficient fee, rejecting replacement 2003ef7352e01e67f77810007e1041951785a98c6fd8cf9d7d92f29316ed6552; new feerate 0.00002802 BTC/kvB <= old feerate 0.00020000 BTC/kvB
+```
+
+This indicates that some participant spent at least one participating coin using a RBF transaction during signing phase. We know the transaction was RBF because the bitcoin node rejects the "replacement".
+So, the most probably explanation is that the user spent the coin/s using Wasabi because all Wasabi's transactions are RBF by default. Even if this doesn't look like an attack, it disrupted the round and
+created throubles for other participants, what means that it should be treated as an attack.
+
+## The mechanism of replacing offending transaction
+
+In this scenario it could be possible to replace the replaceable transaction with a coinjoin transaction that pays more mining fee and less coordination fee. Doing that is possible by creating alternative 
+versions of the coinjoin transaction, something that the clients can do if they know the coordinator's output, I mean, the clients can build and sign lets say three versions of the coinjoin as follow:
+
+* Green: coinjoin transaction as it is currently built (nothing to see here)
+* Yellow: coinjoin transaction where the coordinator output's value is 50% of its original value
+* Red: coinjoin transaction without the coordinator's output
+
+During signing face each client builds these alternative transactions, signs them, and sends not one but three signatures for each alice. The server then can create the exact same three versions and try to
+broadcast conveniently. 
+
+Regardles of whether the coordinator success on this or not, the offending coin/s and all its descendants must be banned, otherwise it could provide a vector to harm the coordination incomes for free.
+
+## The ethic of replacing users' transactions
+
+Currently all what is detailed above is possible because the user opted-in RBF, and because it seems to be a bug on the client that ignores the fact that the coin is participating in a coinjoin and is in critical phase
+so, these are not attacks, what makes it unethical to replace the transaction. However, after the client is fixed (to be aware the coin is participating in a coinjoin in critical phase) this could be different.
+
+Also, as I mentioned before, this same mechanism will be possible for disuading attacks once full RBF became a real thing.
+
+## Replacing Wasabi's coinjoin transactions
+
+Full RBF would allow Wasabi to fight against DoS attacks but it would also enable attackers to harm Wasabi's imcones by broadcasting transactions that replace Wasabi's coinjoin transaction, forcing Wasabi to detect
+and broadcast a less profitable version of the coinjoin.
+
 ----
 
