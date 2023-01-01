@@ -16,7 +16,7 @@ This script is the one we use to send commands to Tor. It simply uses `netcat` t
 ```{include="{{SOURCE_DIRECTORY}}/src/scripts/torcontrol"}
 ```
 
-# Running Tor
+t+ Running Tor
 
 In order to be able to interact with Tor by sending commands and recieving feedback we need to enable the Tor Control Port so, start `Tor` with the switcg `--controlport`. The port number is not really important but `9051` is the one by default so, lets use that one:
 

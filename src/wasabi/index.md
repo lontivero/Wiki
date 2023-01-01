@@ -16,6 +16,10 @@ script to effortless interaction with Wasabi RPC Server.
 
 Script to create a visual representation of a wallet.
 
+###  [Coinjoin 3 sigma](coinjoin_3_sigma)
+
+###  [Standard denominations](standard_denominations)
+
 ###  [Create new user](create_new_zksnacks_users)
 
 Script to generate command line sequence that create users on Wasabi servers

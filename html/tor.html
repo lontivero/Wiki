@@ -97,7 +97,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +110,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -144,7 +144,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="#torcontrol-script"><code>torcontrol</code> script</a></li>
 </ul></li>
-<li><a href="#running-tor">Running Tor</a></li>
 <li><a href="#sending-commands">Sending commands</a>
 <ul>
 <li><a href="#configuration">Configuration</a>
@@ -186,7 +185,7 @@ CMD_WITH_AUTH=&quot;AUTHENTICATE\r\n${CMD}\r\nQUIT&quot;
 
 echo -e $CMD_WITH_AUTH | nc $ADDRESS $PORT
 </code></pre>
-<h1 id="running-tor">Running Tor</h1>
+<p>t+ Running Tor</p>
 <p>In order to be able to interact with Tor by sending commands and
 recieving feedback we need to enable the Tor Control Port so, start
 <code>Tor</code> with the switcg <code>--controlport</code>. The port
