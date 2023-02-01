@@ -97,7 +97,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +110,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -136,12 +136,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <nav id="TOC">
 <h1 class="toc-title">Contents</h1>
 <ul>
-<li><a href="#create-raw-sefl-spending-transaction">Create raw sefl-spending transaction</a></li>
+<li><a href="#create-raw-sefl-spending-transaction">Create raw
+sefl-spending transaction</a></li>
 </ul>
 </nav>
 <hr>
-<h2 id="create-raw-sefl-spending-transaction">Create raw sefl-spending transaction</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">bbcli</span><span class="op">=</span><span class="st">&quot;bitcoin-cli -regtest -datadir=/home/lontivero/tmp/bitcoind&quot;</span></span>
+<h2 id="create-raw-sefl-spending-transaction">Create raw sefl-spending
+transaction</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">bbcli</span><span class="op">=</span><span class="st">&quot;bitcoin-cli -regtest -datadir=/home/lontivero/tmp/bitcoind&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">miner_address</span><span class="op">=</span><span class="va">$($bbcli</span> getnewaddress<span class="va">)</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">address</span><span class="op">=</span><span class="va">$($bbcli</span> getnewaddress<span class="va">)</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">generated_blocks</span><span class="op">=</span><span class="va">$($bbcli</span> generatetoaddress 101 <span class="va">$miner_address)</span></span>
@@ -149,6 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">unsigned_raw_tx</span><span class="op">=</span><span class="va">$($bbcli</span> createrawtransaction <span class="st">&quot;[{</span><span class="dt">\&quot;</span><span class="st">txid</span><span class="dt">\&quot;</span><span class="st">:</span><span class="dt">\&quot;</span><span class="va">$txid</span><span class="dt">\&quot;</span><span class="st">, </span><span class="dt">\&quot;</span><span class="st">vout</span><span class="dt">\&quot;</span><span class="st">:0}]&quot;</span> <span class="st">&quot;[{</span><span class="dt">\&quot;</span><span class="va">$address</span><span class="dt">\&quot;</span><span class="st">:30}]&quot;</span><span class="va">)</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="va">$bbcli</span> testmempoolaccept <span class="st">&quot;[</span><span class="dt">\&quot;</span><span class="va">$unsigned_raw_tx</span><span class="dt">\&quot;</span><span class="st">]&quot;</span></span></code></pre></div>
+<script src="https://nocomment.netlify.app/embed.js" id="nocomment"></script>
 </article>
 <script>hljs.highlightAll();</script>
 </body>

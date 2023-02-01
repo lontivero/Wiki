@@ -97,7 +97,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +110,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -136,29 +136,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <nav id="TOC">
 <h1 class="toc-title">Contents</h1>
 <ul>
-<li><a href="#capture-all-bitcoin-traffic">Capture all bitcoin traffic</a>
+<li><a href="#capture-all-bitcoin-traffic">Capture all bitcoin
+traffic</a>
 <ul>
 <li><a href="#for-nixos">For NixOS</a></li>
 </ul></li>
 </ul>
 </nav>
 <hr>
-<p>Use <code>tcpdump</code>. You will need to <code>sudo</code> by sure. Example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> lo <span class="at">-s</span> 0 <span class="at">-w</span> tcp-traffic-dump.pcap</span></code></pre></div>
+<p>Use <code>tcpdump</code>. You will need to <code>sudo</code> by sure.
+Example:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tcpdump</span> <span class="at">-i</span> lo <span class="at">-s</span> 0 <span class="at">-w</span> tcp-traffic-dump.pcap</span></code></pre></div>
 <ul>
-<li><code>-i &lt;interface&gt;</code> <code>lo</code> for local, wlp4s0 for my wan</li>
-<li><code>-w &lt;file&gt;</code> saves the packet data to the file for later analysis (with wireshark for example)</li>
-<li><code>-s &lt;snaplen&gt;</code> how many bytes of data to take for each package. The default value is 262144 and should be enough in most of the cases. (<code>-s 0</code> capture the full packet)</li>
-<li><code>-XX</code> print/dump the data of each packet in hex and ASCII</li>
-<li><code>-A</code> print each packet in ASCII. Handly for capturing web traffic.</li>
-<li><code>-n</code> do not convert addresses to names. Do not use dns</li>
+<li><code>-i &lt;interface&gt;</code> <code>lo</code> for local, wlp4s0
+for my wan</li>
+<li><code>-w &lt;file&gt;</code> saves the packet data to the file for
+later analysis (with wireshark for example)</li>
+<li><code>-s &lt;snaplen&gt;</code> how many bytes of data to take for
+each package. The default value is 262144 and should be enough in most
+of the cases. (<code>-s 0</code> capture the full packet)</li>
+<li><code>-XX</code> print/dump the data of each packet in hex and
+ASCII</li>
+<li><code>-A</code> print each packet in ASCII. Handly for capturing web
+traffic.</li>
+<li><code>-n</code> do not convert addresses to names. Do not use
+dns</li>
 </ul>
 <h2 id="capture-all-bitcoin-traffic">Capture all bitcoin traffic</h2>
-<p>Use <code>tcpdump --list-interfaces</code> to list the available interfaces first. Then call the script with the right interface. For example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> WIFI=<span class="va">$(</span><span class="ex">tcpdump</span> <span class="at">--list-interfaces</span> <span class="kw">|</span> <span class="fu">grep</span> Running <span class="kw">|</span> <span class="fu">grep</span> Wireless <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39; &#39;</span> <span class="at">-f1</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39;.&#39;</span> <span class="at">-f</span> 2<span class="va">)</span></span>
+<p>Use <code>tcpdump --list-interfaces</code> to list the available
+interfaces first. Then call the script with the right interface. For
+example:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> WIFI=<span class="va">$(</span><span class="ex">tcpdump</span> <span class="at">--list-interfaces</span> <span class="kw">|</span> <span class="fu">grep</span> Running <span class="kw">|</span> <span class="fu">grep</span> Wireless <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39; &#39;</span> <span class="at">-f1</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39;.&#39;</span> <span class="at">-f</span> 2<span class="va">)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ./bitdump.sh <span class="va">$WIFI</span></span></code></pre></div>
 <p>Here the script:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env sh</span></span>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env sh</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">SELF</span><span class="op">=</span><span class="kw">`</span><span class="fu">basename</span> <span class="va">$0</span><span class="kw">`</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -206,7 +220,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
 <h3 id="for-nixos">For NixOS</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-shell</span> <span class="at">-p</span> tcpdump</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-shell</span> <span class="at">-p</span> tcpdump</span></code></pre></div>
+<script src="https://nocomment.netlify.app/embed.js" id="nocomment"></script>
 </article>
 <script>hljs.highlightAll();</script>
 </body>

@@ -97,7 +97,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +110,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -140,80 +140,137 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="#run-remote-command">Run remote command</a></li>
 </ul></li>
-<li><a href="#create-a-persistent-connection-to-a-machine">Create a persistent connection to a machine</a></li>
+<li><a href="#create-a-persistent-connection-to-a-machine">Create a
+persistent connection to a machine</a></li>
 <li><a href="#tunneling">Tunneling</a>
 <ul>
-<li><a href="#port-forward-testnet-rpc">Port forward testnet RPC</a></li>
-<li><a href="#port-forward-testnet-p2p">Port forward testnet P2P</a></li>
+<li><a href="#port-forward-testnet-rpc">Port forward testnet
+RPC</a></li>
+<li><a href="#port-forward-testnet-p2p">Port forward testnet
+P2P</a></li>
 </ul></li>
 <li><a href="#edit-remote-files-vim">Edit remote files (Vim)</a>
 <ul>
 <li><a href="#edit-remote-files">Edit remote files</a></li>
 </ul></li>
-<li><a href="#enable-password-less-ssh-login">Enable password-less ssh login</a>
+<li><a href="#enable-password-less-ssh-login">Enable password-less ssh
+login</a>
 <ul>
-<li><a href="#copy-your-ssh-public-key-to-a-server-from-a-machine-that-doesnt-have-ssh-copy-id">Copy your ssh public key to a server from a machine that doesn’t have ssh-copy-id</a></li>
-<li><a href="#transfer-ssh-public-key-to-another-machine-in-one-step">Transfer ssh public key to another machine in one step</a></li>
+<li><a
+href="#copy-your-ssh-public-key-to-a-server-from-a-machine-that-doesnt-have-ssh-copy-id">Copy
+your ssh public key to a server from a machine that doesn’t have
+ssh-copy-id</a></li>
+<li><a
+href="#transfer-ssh-public-key-to-another-machine-in-one-step">Transfer
+ssh public key to another machine in one step</a></li>
 </ul></li>
-<li><a href="#copy-directory-from-testing-to-production">Copy directory from testing to production</a></li>
-<li><a href="#mount-filesystem-through-ssh">Mount filesystem through ssh</a></li>
-<li><a href="#ssh-connection-through-host-in-the-middle">SSH connection through host in the middle</a></li>
+<li><a href="#copy-directory-from-testing-to-production">Copy directory
+from testing to production</a></li>
+<li><a href="#mount-filesystem-through-ssh">Mount filesystem through
+ssh</a></li>
+<li><a href="#ssh-connection-through-host-in-the-middle">SSH connection
+through host in the middle</a></li>
 </ul>
 </nav>
 <hr>
 <h2 id="basics">Basics</h2>
 <h3 id="run-remote-command">Run remote command</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> zk-testing <span class="at">-t</span> <span class="st">&#39;tail -1000 ~/.walletwasabi/backend/Logs | grep whatever&#39;</span></span></code></pre></div>
-<p>To run complex remote shell cmds over ssh, without escaping quotes</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> host <span class="at">-l</span> user <span class="va">$(</span><span class="op">&lt;</span>cmd.txt<span class="va">)</span></span></code></pre></div>
-<p>Much simpler method. More portable version: ssh host -l user “<code>cat cmd.txt</code>”</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> zk-testing <span class="at">-t</span> <span class="st">&#39;tail -1000 ~/.walletwasabi/backend/Logs | grep whatever&#39;</span></span></code></pre></div>
+<p>To run complex remote shell cmds over ssh, without escaping
+quotes</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> host <span class="at">-l</span> user <span class="va">$(</span><span class="op">&lt;</span>cmd.txt<span class="va">)</span></span></code></pre></div>
+<p>Much simpler method. More portable version: ssh host -l user
+“<code>cat cmd.txt</code>”</p>
 <h4 id="download-a-file">Download a file</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> zk-testing:./.bitcoin/mempool.dat ./mempool.dat</span></code></pre></div>
-<h2 id="create-a-persistent-connection-to-a-machine">Create a persistent connection to a machine</h2>
-<p>Create a persistent ssh connection so all future sessions will reuse it.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> zk-testing:./.bitcoin/mempool.dat ./mempool.dat</span></code></pre></div>
+<h2 id="create-a-persistent-connection-to-a-machine">Create a persistent
+connection to a machine</h2>
+<p>Create a persistent ssh connection so all future sessions will reuse
+it.</p>
 <ul>
-<li><code>-f</code> Requests ssh to go to background just before command execution.</li>
-<li><code>-M</code> Places the ssh client into ``master’’ mode for connection sharing.</li>
+<li><code>-f</code> Requests ssh to go to background just before command
+execution.</li>
+<li><code>-M</code> Places the ssh client into ``master’’ mode for
+connection sharing.</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-MNf</span> zk-testing</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-MNf</span> zk-testing</span></code></pre></div>
 <h2 id="tunneling">Tunneling</h2>
 <h3 id="port-forward-testnet-rpc">Port forward testnet RPC</h3>
 <ul>
 <li><code>-L local_socket:host:hostport</code></li>
-<li><code>-N</code> Do not execute a remote command. This is useful for just forwarding ports.</li>
+<li><code>-N</code> Do not execute a remote command. This is useful for
+just forwarding ports.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-N</span> <span class="at">-L</span> 18332:localhost:18332 zk-testing </span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-N</span> <span class="at">-L</span> 18332:localhost:18332 zk-testing </span></code></pre></div>
 <h3 id="port-forward-testnet-p2p">Port forward testnet P2P</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-N</span> <span class="at">-L</span> 8332:localhost:8332 zk-testing </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-N</span> <span class="at">-L</span> 8332:localhost:8332 zk-testing </span></code></pre></div>
 <h2 id="edit-remote-files-vim">Edit remote files (Vim)</h2>
 <p>First, create a persistent connection to the server.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-MNf</span> zk-testing</span></code></pre></div>
-<p><strong>Note:</strong> you can use <code>-v</code> to see what is going on. Also, his command line can be run in background finishing the command line wih <code>&amp;</code> but it will not ask you the password :(</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-MNf</span> zk-testing</span></code></pre></div>
+<p><strong>Note:</strong> you can use <code>-v</code> to see what is
+going on. Also, his command line can be run in background finishing the
+command line wih <code>&amp;</code> but it will not ask you the password
+:(</p>
 <h3 id="edit-remote-files">Edit remote files</h3>
 <h4 id="using-relative-paths">Using relative paths</h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> scp://zk-testing/report.sh</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> scp://zk-testing/report.sh</span></code></pre></div>
 <p>It is also okay to open a direcory</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> scp://zk-testing/</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> scp://zk-testing/</span></code></pre></div>
 <h4 id="using-absolute-paths">Using absolute paths</h4>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> scp://zk-testing//home/user/report.sh</span></code></pre></div>
-<h2 id="enable-password-less-ssh-login">Enable password-less ssh login</h2>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> scp://zk-testing//home/user/report.sh</span></code></pre></div>
+<h2 id="enable-password-less-ssh-login">Enable password-less ssh
+login</h2>
 <p>Copy ssh key to the server.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> zk-testing</span></code></pre></div>
-<h3 id="copy-your-ssh-public-key-to-a-server-from-a-machine-that-doesnt-have-ssh-copy-id">Copy your ssh public key to a server from a machine that doesn’t have ssh-copy-id</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_rsa.pub <span class="kw">|</span> <span class="fu">ssh</span> user@machine “mkdir ~/.ssh<span class="kw">;</span> <span class="fu">cat</span> <span class="op">&gt;&gt;</span> ~/.ssh/authorized_keys”</span></code></pre></div>
-<h3 id="transfer-ssh-public-key-to-another-machine-in-one-step">Transfer ssh public key to another machine in one step</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span><span class="kw">;</span> <span class="ex">ssh-copy-id</span> zk-testing<span class="kw">;</span> <span class="fu">ssh</span> zk-testing</span></code></pre></div>
-<p>This command sequence allows simple setup of (gasp!) password-less SSH logins. Be careful, as if you already have an SSH keypair in your ~/.ssh directory on the local machine, there is a possibility ssh-keygen may overwrite them. ssh-copy-id copies the public key to the remote host and appends it to the remote account’s ~/.ssh/authorized_keys file. When trying ssh, if you used no passphrase for your key, the remote shell appears soon after invoking ssh user@host.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ssh-copy-id</span> zk-testing</span></code></pre></div>
+<h3
+id="copy-your-ssh-public-key-to-a-server-from-a-machine-that-doesnt-have-ssh-copy-id">Copy
+your ssh public key to a server from a machine that doesn’t have
+ssh-copy-id</h3>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_rsa.pub <span class="kw">|</span> <span class="fu">ssh</span> user@machine “mkdir ~/.ssh<span class="kw">;</span> <span class="fu">cat</span> <span class="op">&gt;&gt;</span> ~/.ssh/authorized_keys”</span></code></pre></div>
+<h3 id="transfer-ssh-public-key-to-another-machine-in-one-step">Transfer
+ssh public key to another machine in one step</h3>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span><span class="kw">;</span> <span class="ex">ssh-copy-id</span> zk-testing<span class="kw">;</span> <span class="fu">ssh</span> zk-testing</span></code></pre></div>
+<p>This command sequence allows simple setup of (gasp!) password-less
+SSH logins. Be careful, as if you already have an SSH keypair in your
+~/.ssh directory on the local machine, there is a possibility ssh-keygen
+may overwrite them. ssh-copy-id copies the public key to the remote host
+and appends it to the remote account’s ~/.ssh/authorized_keys file. When
+trying ssh, if you used no passphrase for your key, the remote shell
+appears soon after invoking ssh user@host.</p>
 <p>To generate the keys use the command <code>ssh-keygen</code></p>
-<h2 id="copy-directory-from-testing-to-production">Copy directory from testing to production</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> zk-testing <span class="st">&quot;cd /somedir/tocopy/ &amp;&amp; tar -cf – .&quot;</span> <span class="kw">|</span> <span class="fu">ssh</span> zk-producion <span class="st">&quot;cd /samedir/tocopyto/ &amp;&amp; tar -xf -&quot;</span></span></code></pre></div>
-<p>Good if only you have access to host1 and host2, but they have no access to your host (so ncat won’t work) and they have no direct access to each other.</p>
+<h2 id="copy-directory-from-testing-to-production">Copy directory from
+testing to production</h2>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> zk-testing <span class="st">&quot;cd /somedir/tocopy/ &amp;&amp; tar -cf – .&quot;</span> <span class="kw">|</span> <span class="fu">ssh</span> zk-producion <span class="st">&quot;cd /samedir/tocopyto/ &amp;&amp; tar -xf -&quot;</span></span></code></pre></div>
+<p>Good if only you have access to host1 and host2, but they have no
+access to your host (so ncat won’t work) and they have no direct access
+to each other.</p>
 <h2 id="mount-filesystem-through-ssh">Mount filesystem through ssh</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sshfs</span> name@server:/path/to/folder /path/to/mount/point</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sshfs</span> name@server:/path/to/folder /path/to/mount/point</span></code></pre></div>
 <p>Will allow you to mount a folder security over a network.</p>
-<h2 id="ssh-connection-through-host-in-the-middle">SSH connection through host in the middle</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-t</span> reachable_host ssh unreachable_host</span></code></pre></div>
-<p>Unreachable_host is unavailable from local network, but it’s available from reachable_host’s network. This command creates a connection to unreachable_host through “hidden” connection to reachable_host.</p>
+<h2 id="ssh-connection-through-host-in-the-middle">SSH connection
+through host in the middle</h2>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-t</span> reachable_host ssh unreachable_host</span></code></pre></div>
+<p>Unreachable_host is unavailable from local network, but it’s
+available from reachable_host’s network. This command creates a
+connection to unreachable_host through “hidden” connection to
+reachable_host.</p>
+<script src="https://nocomment.netlify.app/embed.js" id="nocomment"></script>
 </article>
 <script>hljs.highlightAll();</script>
 </body>
