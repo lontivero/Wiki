@@ -88,19 +88,24 @@ open FSharp.Data
 [<Literal>]
 let ResolutionFolder = __SOURCE_DIRECTORY__
 
-type Trace = JsonProvider<"./trace.speedscope.sample.json", ResolutionFolder=ResolutionFolder>
+type Trace = JsonProvider<"./trace.speedscope.json", ResolutionFolder=ResolutionFolder>
 
 let trace = Trace.Load $"{ResolutionFolder}/trace.speedscope.json"
+//let most_freq_events = trace.Profiles |> Array.collect (fun p -> p.Events |> Array.countBy (fun x-> x.Frame)) |> Array.sortByDescending snd;
+//most_freq_events |> Array.take 1000 |> Array.map (fun (f,cnt) -> trace.Shared.Frames[f].Name) |> Array.distinct |> Array.filter (fun x -> x.Contains "Wasabi");
+
 
 trace.Profiles 
 |> Array.collect (
     fun p -> p.Events 
             |> Array.groupBy (fun e -> e.Frame ) 
-            |> Array.map (fun (f,e) -> trace.Shared.Frames[f].Name, (pair e)) 
-            |> Array.filter (fun (f,es)->f.Contains "Wasabi"-  ) 
-            |> Array.map (fun (f,es)-> (p.Name, f), es |> Seq.sumBy (fun (o, c) ->  c.At - o.At))) 
+            |> Array.map (fun (f,e) -> trace.Shared.Frames[f].Name, (e[0], e.[1])) 
+            |> Array.filter (fun (f,es)->f.Contains "Wasabi"  ) 
+            |> Array.map (fun (f,es)-> (p.Name, f), es |> fun (o, c) ->  c.At - o.At)) 
     |> Array.sortByDescending snd 
     |> Array.take 100;;
+
+
 ```
 
 After run it you will get an outputs like this one:

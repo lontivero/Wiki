@@ -235,19 +235,23 @@ class="sourceCode fsharp"><code class="sourceCode fsharp"><span id="cb5-1"><a hr
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">[&lt;</span>Literal<span class="op">&gt;]</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> ResolutionFolder = __SOURCE_DIRECTORY__</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Trace = JsonProvider&lt;<span class="st">&quot;./trace.speedscope.sample.json&quot;</span>, ResolutionFolder=ResolutionFolder&gt;</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Trace = JsonProvider&lt;<span class="st">&quot;./trace.speedscope.json&quot;</span>, ResolutionFolder=ResolutionFolder&gt;</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> trace = Trace<span class="kw">.</span>Load $<span class="st">&quot;{ResolutionFolder}/trace.speedscope.json&quot;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>trace.Profiles </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>|&gt; Array<span class="kw">.</span>collect <span class="op">(</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fun</span> p -&gt; p.Events </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>groupBy <span class="op">(</span><span class="kw">fun</span> e -&gt; e.Frame <span class="op">)</span> </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>map <span class="op">(</span><span class="kw">fun</span> <span class="op">(</span>f,e<span class="op">)</span> -&gt; trace.Shared<span class="kw">.</span>Frames<span class="op">[</span>f<span class="op">]</span>.Name, <span class="op">(</span>pair e<span class="op">))</span> </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>filter <span class="op">(</span><span class="kw">fun</span> <span class="op">(</span>f,es<span class="op">)</span>-&gt;f.Contains <span class="st">&quot;Wasabi&quot;</span>-  <span class="op">)</span> </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>map <span class="op">(</span><span class="kw">fun</span> <span class="op">(</span>f,es<span class="op">)</span>-&gt; <span class="op">(</span>p.Name, f<span class="op">)</span>, es |&gt; Seq<span class="kw">.</span>sumBy <span class="op">(</span><span class="kw">fun</span> <span class="op">(</span>o, c<span class="op">)</span> -&gt;  c.At - o.At<span class="op">)))</span> </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    |&gt; Array<span class="kw">.</span>sortByDescending snd </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    |&gt; Array<span class="kw">.</span>take <span class="dv">100</span>;;</span></code></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>//<span class="co">let most_freq_events = trace.Profiles |&gt; Array.collect (fun p -&gt; p.Events |&gt; Array.countBy (fun x-&gt; x.Frame)) |&gt; Array.sortByDescending snd;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>//<span class="co">most_freq_events |&gt; Array.take 1000 |&gt; Array.map (fun (f,cnt) -&gt; trace.Shared.Frames[f].Name) |&gt; Array.distinct |&gt; Array.filter (fun x -&gt; x.Contains &quot;Wasabi&quot;);</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>trace.Profiles </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>|&gt; Array<span class="kw">.</span>collect <span class="op">(</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fun</span> p -&gt; p.Events </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>groupBy <span class="op">(</span><span class="kw">fun</span> e -&gt; e.Frame <span class="op">)</span> </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>map <span class="op">(</span><span class="kw">fun</span> <span class="op">(</span>f,e<span class="op">)</span> -&gt; trace.Shared<span class="kw">.</span>Frames<span class="op">[</span>f<span class="op">]</span>.Name, <span class="op">(</span>e<span class="op">[</span><span class="dv">0</span><span class="op">]</span>, e.<span class="op">[</span><span class="dv">1</span><span class="op">]))</span> </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>filter <span class="op">(</span><span class="kw">fun</span> <span class="op">(</span>f,es<span class="op">)</span>-&gt;f.Contains <span class="st">&quot;Wasabi&quot;</span>  <span class="op">)</span> </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            |&gt; Array<span class="kw">.</span>map <span class="op">(</span><span class="kw">fun</span> <span class="op">(</span>f,es<span class="op">)</span>-&gt; <span class="op">(</span>p.Name, f<span class="op">)</span>, es |&gt; <span class="kw">fun</span> <span class="op">(</span>o, c<span class="op">)</span> -&gt;  c.At - o.At<span class="op">))</span> </span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    |&gt; Array<span class="kw">.</span>sortByDescending snd </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    |&gt; Array<span class="kw">.</span>take <span class="dv">100</span>;;</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
 <p>After run it you will get an outputs like this one:</p>
 <pre class="output"><code>  [|((&quot;Thread (3342410)&quot;,
       &quot;WalletWasabi!WalletWasabi.BitcoinP2p.P2pBehavior.AttachedNode_MessageReceivedAsync(class NBitcoin.Protocol.Node,class NBitcoin.Protocol.IncomingMessage)&quot;),

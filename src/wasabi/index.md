@@ -14,7 +14,11 @@ script to effortless interaction with Wasabi RPC Server.
 
 ###  [Wallet transactions graph generator](tx_graph_generator)
 
-Script to create a visual representation of a wallet.
+Script to create a visual representation of a transactions in your wallet.
+
+###  [Wallet keys state graph generator](key_state_graph_generator)
+
+Script to create a visual representation of the keys in your wallet
 
 ###  [Coinjoin 3 sigma](coinjoin_3_sigma)
 
