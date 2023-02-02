@@ -203,7 +203,6 @@ class="sourceCode fsx"><code class="sourceCode fsharp"><span id="cb1-1"><a href=
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>|&gt; Seq<span class="kw">.</span>sortByDescending <span class="op">(</span><span class="kw">fun</span> x -&gt; x.meta |&gt; Map<span class="kw">.</span>tryFind <span class="st">&quot;Bandwidth&quot;</span> |&gt; Option<span class="kw">.</span>defaultValue <span class="st">&quot;0&quot;</span> |&gt; <span class="dt">int</span> <span class="op">)</span> </span>
 <span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>|&gt; Seq<span class="kw">.</span>map toRow</span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>|&gt; Seq<span class="kw">.</span>iter <span class="op">(</span>Console<span class="kw">.</span>WriteLine<span class="op">)</span></span></code></pre></div>
-<script src="https://nocomment.netlify.app/embed.js" id="nocomment"></script>
 </article>
 <script>hljs.highlightAll();</script>
 </body>

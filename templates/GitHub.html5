@@ -161,7 +161,9 @@ $for(include-after)$
 $include-after$
 $endfor$
 $-------------------------------------------------------------------------------
+$if(comments)$
 <script src="https://nocomment.netlify.app/embed.js" id="nocomment"></script>
+$endif$
 </article>
 <script>hljs.highlightAll();</script>
 </body>
