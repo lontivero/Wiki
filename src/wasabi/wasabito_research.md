@@ -18,3 +18,4 @@ This pages kees a log of the ideas I would like to work in in order to:
 
 - Analyze [coinjoin anonymity](knapsack)
 
+- Reduce the need [Tor circuit negociations](tor_circuit_reduction) 

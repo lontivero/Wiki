@@ -1,7 +1,7 @@
-source: df8153a19bef9448ba80f5008ea2964401695c86
+source: 4f27538f9247c465807f5068d1441701785b3250
 render: dot -Tsvg -o %o.svg %i
-img: ../../src/images/wasabito_dependency_graph
-out: /home/lontivero/Documents/Wiki/src/images/wasabito_dependency_graph
+img: ../../src/images/tor_streams_tipical
+out: /home/lontivero/Documents/Wiki/src/images/tor_streams_tipical
 
 digraph G {
     fontname="Helvetica,Arial,sans-serif"
@@ -21,11 +21,7 @@ digraph G {
     
     n1 [shape="circle"; style="filled"; color="grey"]
     n2 [shape="circle"; style="filled"; color="grey"]
-    n5 [shape="circle"; style="filled"; color="grey"]
-    n10 [shape="circle"; style="filled"; color="grey"]
-    n11 [shape="circle"; style="filled"; color="grey"]
-    n0 -> n1 -> n2 -> n3 -> n4 -> n5 -> nx1 [arrowsize=1.5; style="solid"];
-    n5 -> nx2 [arrowsize=1.5; style="solid"];
-    n5 -> nx3 [arrowsize=1.5; style="solid"];
-    
+    n0 -> n1 -> n2 -> nx0 [arrowsize=1.5; style="solid"];
+    n2 -> nx1 [arrowsize=1.5; style="solid"];
+    n2 -> nx2 [arrowsize=1.5; style="solid"];
 }

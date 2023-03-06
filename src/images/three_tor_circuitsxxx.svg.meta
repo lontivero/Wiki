@@ -1,7 +1,7 @@
-source: df8153a19bef9448ba80f5008ea2964401695c86
+source: f9bc116b1abddd5980d9cc05555c6e7a0050d915
 render: dot -Tsvg -o %o.svg %i
-img: ../../src/images/wasabito_dependency_graph
-out: /home/lontivero/Documents/Wiki/src/images/wasabito_dependency_graph
+img: ../../src/images/three_tor_circuitsxxx
+out: /home/lontivero/Documents/Wiki/src/images/three_tor_circuitsxxx
 
 digraph G {
     fontname="Helvetica,Arial,sans-serif"
@@ -14,18 +14,23 @@ digraph G {
     edge [style=dotted]
     uc [label="user computer"];
     n0 [label = "entry guard"];
-    nx0 [label = "destination 1"];
-    nx1 [label = "destination 2"];
-    nx2 [label = "destination 3"];
+    nx [label = "coordinator"];
     uc -> n0 
+    n1 -> n3 -> n4 -> n5 -> n6 -> n7 -> n8;
+    n2 -> n3;
+    n2 -> n5 -> n8;
+    n0 -> n3 -> n7;
+    n1 -> n9 -> n10; n11 -> n12 ->n13;
+    n2 -> n10; n5 ->n12; n5 -> n13; n10 -> n3; n11 -> n7; n8 -> n13; n13 -> n8;
+    n13 -> n3;
+    n11 -> n9; n4 -> n9;
     
     n1 [shape="circle"; style="filled"; color="grey"]
     n2 [shape="circle"; style="filled"; color="grey"]
     n5 [shape="circle"; style="filled"; color="grey"]
     n10 [shape="circle"; style="filled"; color="grey"]
     n11 [shape="circle"; style="filled"; color="grey"]
-    n0 -> n1 -> n2 -> n3 -> n4 -> n5 -> nx1 [arrowsize=1.5; style="solid"];
-    n5 -> nx2 [arrowsize=1.5; style="solid"];
-    n5 -> nx3 [arrowsize=1.5; style="solid"];
-    
+    n0 -> n1 -> n2 -> nx [arrowsize=1.5; style="solid"];
+    n0 -> n11 -> n5 -> nx [arrowsize=1.5; style="solid"];
+    n0 -> n10 ->  n11 -> nx[arrowsize=1.5; style="solid"];
 }

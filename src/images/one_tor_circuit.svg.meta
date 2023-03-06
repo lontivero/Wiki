@@ -1,0 +1,42 @@
+source: cbc01e407c4d881fc939aa7cafd6a9bb629ad617
+render: dot -Gsize='10,10' -Tsvg -o %o.svg %i
+img: ../../src/images/one_tor_circuit
+out: /home/lontivero/Documents/Wiki/src/images/one_tor_circuit
+
+
+digraph G {
+    graph [width="10"]
+    fontname="Helvetica,Arial,sans-serif"
+    node [fontname="Helvetica,Arial,sans-serif"]
+    edge [fontname="Helvetica,Arial,sans-serif"]
+
+    style=filled;
+    color=lightgrey;
+    node [style=filled,color=white];
+    edge [style=dotted]
+    uc [label="user computer"];
+    n0 [label = "entry guard"];
+    nx [label = "coordinator"];
+    uc -> n0 
+    n1 -> n3 -> n4 -> n5 -> n6 -> n7 -> n8;
+    n2 -> n3;
+    n2 -> n5 -> n8;
+    n0 -> n3 -> n7;
+    n1 -> n9 -> n10; n11 -> n12 ->n13;
+    n5 ->n12; n5 -> n13; n10 -> n3; n11 -> n7; n8 -> n13; n13 -> n8;
+    n13 -> n3;
+    n11 -> n9; n4 -> n9;
+    
+    n1 [shape="circle"; style="filled"; color="grey"]
+    n2 [shape="circle"; style="filled"; color="grey"]
+    n5 [shape="circle"; style="filled"; color="grey"]
+    n10 [shape="circle"; style="filled"; color="grey"]
+    n11 [shape="circle"; style="filled"; color="grey"]
+    n0 -> n1 -> n2 -> nx [arrowsize=1.5; style="solid"];
+    
+    n11 -> n5 -> nx [arrowsize=1.5; style="solid"];
+    n0 -> n11;
+    n0 -> n10;
+    n10 -> n11 -> nx [arrowsize=1.5; style="solid"];
+    n2 -> n10 [arrowsize=1.5; style="solid"];
+}         
