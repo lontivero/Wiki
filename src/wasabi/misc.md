@@ -77,5 +77,32 @@ namespace BinaryFilters
 }
 ```
 
+```f#
+open System
+open System.IO
+
+let bin xs = Convert.FromHexString xs
+let binBE xs = xs |> bin |> Array.rev
+
+let binFile = File.Create "IndexMain.bin"
+let writer = new BinaryWriter (binFile)
+let textFile = File.OpenRead "MatureIndex.dat"
+let reader = new StreamReader(textFile)
+
+(fun _ -> reader.ReadLine())
+|> Seq.initInfinite
+|> Seq.takeWhile (fun x -> x <> null)
+|> Seq.map (fun x -> x.Split(":", StringSplitOptions.RemoveEmptyEntries))
+|> Seq.map (fun [|bheight; bid; bfilter; bph; btime |] -> bheight, binGE bid, binBE bph, btime, bin bfilter )
+|> Seq.iter (fun (height, bid, bph, btime, bfilter) ->
+       writer.Write height
+       writer.Write bid
+       writer.Write bph
+       writer.Write btime
+       writer.Write (bfilter.Length)
+       writer.Write bfilter)
+
+
+```
 [Tor reliability proposal](tor_reliability_proposal)
 

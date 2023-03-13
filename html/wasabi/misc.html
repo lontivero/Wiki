@@ -191,6 +191,31 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<pre class="f#"><code>open System
+open System.IO
+
+let bin xs = Convert.FromHexString xs
+let binBE xs = xs |&gt; bin |&gt; Array.rev
+
+let binFile = File.Create &quot;IndexMain.bin&quot;
+let writer = new BinaryWriter (binFile)
+let textFile = File.OpenRead &quot;MatureIndex.dat&quot;
+let reader = new StreamReader(textFile)
+
+(fun _ -&gt; reader.ReadLine())
+|&gt; Seq.initInfinite
+|&gt; Seq.takeWhile (fun x -&gt; x &lt;&gt; null)
+|&gt; Seq.map (fun x -&gt; x.Split(&quot;:&quot;, StringSplitOptions.RemoveEmptyEntries))
+|&gt; Seq.map (fun [|bheight; bid; bfilter; bph; btime |] -&gt; bheight, binGE bid, binBE bph, btime, bin bfilter )
+|&gt; Seq.iter (fun (height, bid, bph, btime, bfilter) -&gt;
+       writer.Write height
+       writer.Write bid
+       writer.Write bph
+       writer.Write btime
+       writer.Write (bfilter.Length)
+       writer.Write bfilter)
+
+</code></pre>
 <p><a href="tor_reliability_proposal">Tor reliability proposal</a></p>
 </article>
 <script>hljs.highlightAll();</script>
