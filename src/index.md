@@ -8,6 +8,8 @@ title: My knowledge base
 
  [Wasabi Wallet](wasabi/index)
 
+ [Nostr](nostr/index)
+ 
  [Bitcoin](bitcoin)
  
  [Nix](nix)
