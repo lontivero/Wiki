@@ -54,6 +54,10 @@ The eviction time is fully controlable by us and we can reduce it from the defau
 * **Enable full-RBF on the clients** would allow the wasabi clients to replace transactions that have been replaced in The Mempool.
 * **Enable full-RBF on the coordinator's node** would allow to replace transactions and reflex that change on the clients via mempool synchronization mechanism.
 
+## Decrease coinjoin confirmation target
+
+This means that coinjoins will pay a bit more, what makes them harder to evict during mempool high pressure and more costly to replace. Moreover, in case there is a competing tx already known
+by the network it could replace it in those node supporting full-rbf (the ethics of that is controversial imo)
 
 
 

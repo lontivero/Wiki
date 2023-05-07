@@ -82,6 +82,8 @@ inconsistencies</a></li>
 <li><a href="#make-long-live-inconsistencies-not-so-long">Make long-live
 inconsistencies not so long</a></li>
 <li><a href="#full-rbf">full-RBF</a></li>
+<li><a href="#decrease-coinjoin-confirmation-target">Decrease coinjoin
+confirmation target</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -216,6 +218,13 @@ Mempool.</li>
 allow to replace transactions and reflex that change on the clients via
 mempool synchronization mechanism.</li>
 </ul>
+<h2 id="decrease-coinjoin-confirmation-target">Decrease coinjoin
+confirmation target</h2>
+<p>This means that coinjoins will pay a bit more, what makes them harder
+to evict during mempool high pressure and more costly to replace.
+Moreover, in case there is a competing tx already known by the network
+it could replace it in those node supporting full-rbf (the ethics of
+that is controversial imo)</p>
 </article>
 <script>hljs.highlightAll();</script>
 </body>
