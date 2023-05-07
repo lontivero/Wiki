@@ -20,4 +20,4 @@ This pages kees a log of the ideas I would like to work in in order to:
 
 - Reduce the need [Tor circuit negociations](tor_circuit_reduction) 
 
-- Rethink [Mempool hell](mempool-hell)
+- Rethink  [Mempool hell](mempool-hell)
